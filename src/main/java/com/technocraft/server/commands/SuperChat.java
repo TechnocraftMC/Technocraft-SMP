@@ -37,7 +37,7 @@ public class SuperChat implements CommandExecutor, Listener {
     {
         if (superUsers.contains(e.getPlayer()))
         {
-            e.setMessage(ChatColor.AQUA + e.getMessage());
+            e.setFormat(ChatColor.WHITE + "" + ChatColor.BOLD + e.getPlayer().getName() + ChatColor.RESET + " " + ChatColor.AQUA + e.getMessage());
         }
     }
 }

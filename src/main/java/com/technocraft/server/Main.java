@@ -14,6 +14,7 @@ public class Main extends JavaPlugin {
         getCommand("global").setExecutor(new GlobalCommand());
         getCommand("opwiz").setExecutor(new OP());
         getCommand("silence").setExecutor(new Silence());
+        getCommand("raw").setExecutor(new RawCommand());
         getCommand("superchat").setExecutor(new SuperChat());
         getCommand("updater").setExecutor(new Updater(this));
 
