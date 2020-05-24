@@ -15,6 +15,7 @@ public class Main extends JavaPlugin {
         getCommand("opwiz").setExecutor(new OP());
         getCommand("silence").setExecutor(new Silence());
         getCommand("raw").setExecutor(new RawCommand());
+        getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("superchat").setExecutor(new SuperChat());
         getCommand("updater").setExecutor(new Updater(this));
 

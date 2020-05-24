@@ -49,8 +49,8 @@ public class GamemodeCommand implements CommandExecutor {
         if (gamemode.equals(GameMode.CREATIVE))
         {
             player.setGameMode(GameMode.CREATIVE);
-            player.setFlying(true);
             player.setVelocity(new Vector(0, .7, 0));
+            player.setFlying(true);
             message(player, admin, gamemode);
             return;
         }
@@ -67,7 +67,7 @@ public class GamemodeCommand implements CommandExecutor {
         player.sendMessage(Chat.message("Gamemode", "Your gamemode has been updated to" + Chat.value((gamemode.equals(GameMode.CREATIVE) ? "creative" : "survival"), ".")));
         if (admin != null)
         {
-            admin.sendMessage(Chat.valueOnly(player.getName(), "'s gamemode has been updated to " + Chat.value((gamemode.equals(GameMode.CREATIVE) ? "creative" : "survival"), ".")));
+            admin.sendMessage(Chat.valueOnly("Chat", player.getName(), "'s gamemode has been updated to " + Chat.value((gamemode.equals(GameMode.CREATIVE) ? "creative" : "survival"), ".")));
         }
     }
 }
