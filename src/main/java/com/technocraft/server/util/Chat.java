@@ -49,7 +49,7 @@ public class Chat {
     //Make a message with a prefix and a body
     public static String message(String prefix, String body)
     {
-        return prefix + getBody(body);
+        return getPrefix(prefix) + getBody(body);
     }
 
     public static String getValueColor()
@@ -62,9 +62,9 @@ public class Chat {
         return valueFormatter(value, body, BodyType.NORMAL, true);
     }
 
-    public static String valueOnly(String value, String body)
+    public static String valueOnly(String prefix, String value, String body)
     {
-        return valueFormatter(value, body, BodyType.NORMAL, false);
+        return getPrefix(prefix) + valueFormatter(value, body, BodyType.NORMAL, false);
     }
 
     public static String error(String prefix, String error)
@@ -107,13 +107,13 @@ public class Chat {
 
     public static String helpListFormat(String command, String instruction)
     {
-        return getPrefixColorCode() + divider + ChatColor.GOLD + command + " " + ChatColor.GRAY + instruction + ".";
+        return getPrefixColorCode() + divider + " " + getValueColor() + command + " " + getBodyColor() + instruction + ".";
     }
 
     public static String help(String commandName, String command[], String instructions[])
     {
         StringBuilder s = new StringBuilder();
-        s.append(message("Help", "Listing Commands for: " + ChatColor.GOLD + commandName + ChatColor.GRAY + ". \n"));
+        s.append(message("Help", "Listing Commands for: " + getValueColor() + commandName + getBodyColor() + ". \n"));
         for (int i = 0; i < command.length; i++)
         {
             s.append(helpListFormat(command[i], instructions[i]) + "\n");

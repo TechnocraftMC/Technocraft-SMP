@@ -42,12 +42,12 @@ public class ChatBypass implements CommandExecutor {
         if (bypassPlayers.contains(targetPlayer))
         {
             bypassPlayers.remove(targetPlayer);
-            commandSender.sendMessage(Chat.valueOnly(targetPlayer.getName(), "no longer has a chat bypass."));
+            commandSender.sendMessage(Chat.valueOnly("Chat", targetPlayer.getName(), "no longer has a chat bypass."));
             targetPlayer.sendMessage(Chat.message("Chat", "You no longer have a chat bypass during chat silence."));
         } else
         {
             bypassPlayers.add(targetPlayer);
-            commandSender.sendMessage(Chat.valueOnly(targetPlayer.getName(), "now has a chat bypass."));
+            commandSender.sendMessage(Chat.valueOnly("Chat", targetPlayer.getName(), "now has a chat bypass."));
             targetPlayer.sendMessage(Chat.message("Chat", "You now have a chat bypass during chat silence."));
         }
         return true;

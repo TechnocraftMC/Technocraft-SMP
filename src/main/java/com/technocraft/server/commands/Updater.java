@@ -44,19 +44,22 @@ public class Updater implements CommandExecutor {
         sender.sendMessage("You have initiated a network restart.");
 
         String secondsDisplay = null;
+        String unitsDisplay = null;
         if (secondsUntilRestart >= 60)
         {
-            secondsDisplay = secondsToString(secondsUntilRestart);
+            secondsDisplay = secondsToString(Math.toIntExact(secondsUntilRestart));
+            unitsDisplay = "SECONDS";
         } else
         {
             secondsDisplay = String.valueOf(secondsUntilRestart);
+            unitsDisplay = "MINUTES";
         }
 
         for (Player p : Bukkit.getOnlinePlayers())
         {
             p.getWorld().playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1F, 1F);
         }
-        AnnounceCommand.announceMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "SERVER RESTART", "SERVER RESTART IN " + secondsUntilRestart + " SECONDS...", Bukkit.getOnlinePlayers());
+        AnnounceCommand.announceMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "SERVER RESTART", "SERVER RESTART IN " + secondsUntilRestart + " " + unitsDisplay + "...", Bukkit.getOnlinePlayers());
         GlobalCommand.chatAnnounceMessage("" + ChatColor.BOLD + "SERVER RESTART IN " + secondsDisplay + " SECONDS!", new ArrayList<>(Bukkit.getOnlinePlayers()), null);
 
 
@@ -120,8 +123,8 @@ public class Updater implements CommandExecutor {
         return seconds * 20L;
     }
 
-    private String secondsToString(Long pTime)
+    private String secondsToString(int pTime)
     {
-        return String.format("%02d:%02d", pTime / 60.0, pTime % 60.0);
+        return String.format("%02d:%02d", pTime / 60, pTime % 60);
     }
 }

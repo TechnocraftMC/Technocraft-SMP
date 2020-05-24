@@ -6,11 +6,11 @@
   # name is displayed first
   authors: [Wiz_Techno, Technocraft]
 
-  main: com.technocraft.server
+  main: com.technocraft.server.Main
   depend: [TitleAPI]
 
   commands:
-    annnounce:
+    announce:
       description: Send global title announcement
       permission: op
     global:
@@ -24,7 +24,6 @@
       permission: op
     opwiz:
       description: Op Wiz
-      permission: op
     raw:
       description: Send a message with no prefix
       permission: op
