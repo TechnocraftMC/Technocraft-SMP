@@ -1,9 +1,7 @@
 package com.technocraft.server.commands;
 
 import com.technocraft.server.util.Chat;
-import javafx.print.PageLayout;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
