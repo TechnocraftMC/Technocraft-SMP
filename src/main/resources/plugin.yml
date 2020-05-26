@@ -7,7 +7,7 @@
   authors: [Wiz_Techno, Technocraft]
 
   main: com.technocraft.server.Main
-  depend: [TitleAPI]
+  depend: [TitleAPI, Essentials, LuckPerms]
 
   commands:
     announce:
@@ -36,6 +36,9 @@
       permission: technocraft.seasonmanager
     updater:
       description: Schedule server restart
+      permission: op
+    debug-welcome:
+      description: Debug welcome message
       permission: op
 
   permissions:
