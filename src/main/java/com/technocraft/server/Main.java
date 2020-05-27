@@ -24,6 +24,7 @@ public class Main extends JavaPlugin {
         getCommand("superchat").setExecutor(new SuperChat());
         getCommand("updater").setExecutor(new Updater(this));
         getCommand("debug-welcome").setExecutor(new PlayerFirstJoin(this));
+        getCommand("getadmin").setExecutor(new GetAdminCommand());
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);

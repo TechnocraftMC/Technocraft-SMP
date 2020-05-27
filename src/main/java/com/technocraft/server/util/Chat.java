@@ -17,7 +17,7 @@ public class Chat {
 
     private static ChatColor valueColor = ChatColor.GOLD;
 
-    private static ChatColor miniAnnouncementColor = ChatColor.BLUE;
+    private static ChatColor miniAnnouncementColor = ChatColor.AQUA;
 
 
     //Get the Technocraft>
@@ -94,7 +94,7 @@ public class Chat {
     private static String valueFormatter(String value, String body, BodyType type, boolean isSpace)
     {
         //Check to see if it is a message like VALUE's value
-        if (body.startsWith("'") || body.startsWith(".") || body.startsWith(","))
+        if (body.startsWith("'") || body.startsWith(".") || body.startsWith(",") || body.startsWith(")"))
         {
             return (isSpace ? " " : "") + getValueColor() + value + (type.equals(BodyType.NORMAL) ? getBody(body) : getminiAnn(body));
         } else

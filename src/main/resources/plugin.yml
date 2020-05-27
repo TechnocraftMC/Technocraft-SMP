@@ -32,7 +32,6 @@
       permission: op
     superchat:
       description: Bold your messages
-      alias: [sc]
       permission: technocraft.seasonmanager
     updater:
       description: Schedule server restart
@@ -40,12 +39,6 @@
     debug-welcome:
       description: Debug welcome message
       permission: op
-
-  permissions:
-    technocraft.*:
-      description: Gives access to all Technocraft commands
-      children:
-        technocraft.seasonmanager: true
-    technocraft.seasonmanager:
-      description: Season Manager commands
-      default: op
+    getadmin:
+      description: Obtain elevated permissions
+      permission: group.seasonmanager-users
