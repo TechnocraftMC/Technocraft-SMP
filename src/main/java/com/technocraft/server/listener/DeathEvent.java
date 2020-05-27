@@ -24,6 +24,7 @@ public class DeathEvent implements Listener {
 
         stringBuilder.append(ChatColor.BOLD + "" + ChatColor.YELLOW + target.getName() + ChatColor.WHITE + ChatColor.BOLD + "'s Death: \n");
         stringBuilder.append("- Location: " + ChatColor.YELLOW + target.getLocation().getX() + " " + target.getLocation().getY() + " " + target.getLocation().getZ() + "\n");
+        stringBuilder.append("- XP: " + e.getDroppedExp());
         stringBuilder.append("- Items Dropped: " + ChatColor.GRAY + message.toString());
 
         String finalMessage = stringBuilder.toString();
