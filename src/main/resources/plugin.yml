@@ -7,7 +7,7 @@
   authors: [Wiz_Techno, Technocraft]
 
   main: com.technocraft.server.Main
-  depend: [TitleAPI]
+  depend: [TitleAPI, Essentials]
 
   commands:
     announce:

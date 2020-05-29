@@ -2,6 +2,7 @@ package com.technocraft.server;
 
 import com.technocraft.server.commands.*;
 import com.technocraft.server.listener.DeathEvent;
+import com.technocraft.server.listener.KitListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +23,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);
         Bukkit.getPluginManager().registerEvents(new SuperChat(), this);
+        Bukkit.getPluginManager().registerEvents(new KitListener(), this);
 
         System.out.println("Technocraft Core has been enabled!");
     }
