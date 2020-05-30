@@ -22,10 +22,10 @@ public class DeathEvent implements Listener {
             message.append(item.getAmount() + "x " + item.getType().toString().replace("LEGACY_", "") + ", ");
         }
 
-        stringBuilder.append(ChatColor.BOLD + "" + ChatColor.YELLOW + target.getName() + ChatColor.WHITE + ChatColor.BOLD + "'s Death: \n");
-        stringBuilder.append("- Location: " + ChatColor.YELLOW + target.getLocation().getX() + " " + target.getLocation().getY() + " " + target.getLocation().getZ() + "\n");
-        stringBuilder.append("- XP: " + e.getDroppedExp());
-        stringBuilder.append("- Items Dropped: " + ChatColor.GRAY + message.toString());
+        stringBuilder.append(ChatColor.YELLOW + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ChatColor.BOLD + "'s Death: \n");
+        stringBuilder.append(ChatColor.WHITE + "- Location: " + ChatColor.YELLOW + target.getLocation().getX() + " " + target.getLocation().getY() + " " + target.getLocation().getZ() + "\n");
+        stringBuilder.append(ChatColor.BOLD + "" + ChatColor.WHITE + "- XP: " + ChatColor.YELLOW + e.getDroppedExp() + "\n");
+        stringBuilder.append(ChatColor.BOLD + "" + ChatColor.WHITE + "- Items Dropped: " + ChatColor.GRAY + message.toString());
 
         String finalMessage = stringBuilder.toString();
 

@@ -48,11 +48,11 @@ public class Updater implements CommandExecutor {
         if (secondsUntilRestart >= 60)
         {
             secondsDisplay = secondsToString(Math.toIntExact(secondsUntilRestart));
-            unitsDisplay = "SECONDS";
+                unitsDisplay = "MINUTES";
         } else
         {
             secondsDisplay = String.valueOf(secondsUntilRestart);
-            unitsDisplay = "MINUTES";
+            unitsDisplay = "SECONDS";
         }
 
         for (Player p : Bukkit.getOnlinePlayers())
@@ -60,7 +60,7 @@ public class Updater implements CommandExecutor {
             p.getWorld().playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1F, 1F);
         }
         AnnounceCommand.announceMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "SERVER RESTART", "SERVER RESTART IN " + secondsUntilRestart + " " + unitsDisplay + "...", Bukkit.getOnlinePlayers());
-        GlobalCommand.chatAnnounceMessage("" + ChatColor.BOLD + "SERVER RESTART IN " + secondsDisplay + " SECONDS!", new ArrayList<>(Bukkit.getOnlinePlayers()), null);
+        GlobalCommand.chatAnnounceMessage("" + ChatColor.BOLD + "SERVER RESTART IN " + secondsDisplay + " " + unitsDisplay + "!", new ArrayList<>(Bukkit.getOnlinePlayers()), null);
 
 
         //x-5 seconds in
@@ -73,6 +73,18 @@ public class Updater implements CommandExecutor {
                 }
             }
         }, toTicks(secondsUntilRestart - 6L));
+
+        //x seconds in
+        Bukkit.getScheduler().runTaskLater(main, new Runnable() {
+            public void run()
+            {
+                for (Player p : Bukkit.getOnlinePlayers())
+                {
+                    GlobalCommand.chatAnnounceMessage("Server restart in 10 seconds...", new ArrayList<>(Collections.singletonList(p)), null);
+                    p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1F, 1F);
+                }
+            }
+        }, toTicks(secondsUntilRestart - 5L));
 
 
         //x seconds in
@@ -95,7 +107,7 @@ public class Updater implements CommandExecutor {
                 {
                     for (Player p : world.getPlayers())
                     {
-                        if (!p.isOp())
+                        if (!Bukkit.getWhitelistedPlayers().contains(p))
                         {
                             p.kickPlayer("The server is restarting... Please rejoin in about 30 seconds!");
                         }

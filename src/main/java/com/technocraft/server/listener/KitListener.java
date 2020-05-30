@@ -32,19 +32,22 @@ public class KitListener implements Listener {
         {
             player.giveExpLevels(5);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:give " + player.getName() + " minecraft:splash_potion{display:{Name:'{\"text\":\"Legendary Potion of Speed\",\"color\":\"gold\",\"bold\":true}',Lore:['{\"text\":\"Only legends have spoken of such power...\"}','{\"text\":\"Use it wisely!\"}']},CustomPotionEffects:[{Id:1b,Amplifier:2b,Duration:12000,ShowParticles:0b}],CustomPotionColor:8254207} 1");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + player.getName() + " parent addtemp 3 1mo accumulate");
             e.getUser().giveMoney(BigDecimal.valueOf(100, 0));
             kitCommands(player.getName(), "donator");
-        } else if (e.getKit().getName().equals("donator"))
+        } else if (e.getKit().getName().equals("benefactor"))
         {
             player.giveExpLevels(15);
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:give " + player.getName() + " minecraft:splash_potion{display:{Name:'{\"text\":\"Super Legendary Potion of Speed\",\"color\":\"gold\",\"bold\":true}',Lore:['{\"text\":\"Only legends have spoken of such power...\"}','{\"text\":\"Use it wisely!\"}']},CustomPotionEffects:[{Id:1b,Amplifier:2b,Duration:12000,ShowParticles:0b}],CustomPotionColor:8254207} 3");
             e.getUser().giveMoney(BigDecimal.valueOf(300, 0));
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + player.getName() + " parent addtemp 8 1mo accumulate");
             kitCommands(player.getName(), "benefactor");
         }
     }
 
     private void kitCommands(String playerName, String kitName)
     {
+        String rankName = kitName.equals("benefactor") ? "Benefactor" : "Donator";
         ChatColor rankColor = kitName.equals("benefactor") ? ChatColor.AQUA : ChatColor.DARK_PURPLE;
         AnnounceCommand.announceMessage(ChatColor.BOLD + "Donation", rankColor + playerName + " has donated!", new ArrayList<>(Bukkit.getOnlinePlayers()));
         for (Player p : Bukkit.getOnlinePlayers())
@@ -60,10 +63,10 @@ public class KitListener implements Listener {
 
         //Set embed message
         embedBuilder.setTitle(new WebhookEmbed.EmbedTitle("RANK PURCHASE", null));
-        embedBuilder.setDescription("Thank you to **" + playerName + "** for purchasing Donator.\n" +
+        embedBuilder.setDescription("Thank you to **" + playerName + "** for purchasing **" + rankName + "**.\n" +
                 "Through generous donations like theirs, this server is able to stay afloat.");
         embedBuilder.setFooter(new WebhookEmbed.EmbedFooter("This is an automated action when a user receives their rank in-game", "http://cdn.discordapp.com/icons/601804017986830337/17a532e4d925ebd3e0a9dbbfc6084e02.png"));
-        embedBuilder.setColor((rankColor.equals("benefactor") ? Color.CYAN.getRGB() : Color.MAGENTA.getRGB()));
+        embedBuilder.setColor((kitName.equals("benefactor") ? Color.CYAN.getRGB() : Color.MAGENTA.getRGB()));
 
         //Send
         messageBuilder.addEmbeds(embedBuilder.build());
