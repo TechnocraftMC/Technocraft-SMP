@@ -1,5 +1,6 @@
 package com.technocraft.server.commands;
 
+import net.ess3.api.events.PrivateMessagePreSendEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -51,6 +52,18 @@ public class Silence implements CommandExecutor, Listener {
                  e.getPlayer().sendMessage(ChatColor.RED + "The chat is silenced.");
              }
          }
+    }
+
+    @EventHandler
+    public void onPrivateMessagePreSend(PrivateMessagePreSendEvent e)
+    {
+        if (Silence.isSilenced)
+        {
+            if (!ChatBypass.bypassPlayers.contains(Bukkit.getPlayer(e.getSender().getName())))
+            {
+                e.setCancelled(true);
+            }
+        }
     }
 }
 

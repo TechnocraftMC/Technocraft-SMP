@@ -33,7 +33,7 @@ public class GetAdminCommand implements CommandExecutor {
             {
                 if (seasonmanager.hasPermission("group.seasonmanager-users"))
                 {
-                    seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "You now have" + Chat.valueAnn("Technocraft Season Manager elevated permissions", Chat.getminiAnnColor() + "(enabled by " + Chat.value(player.getName(), ")"))));
+                    seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "You now have" + Chat.valueAnn("Technocraft Season Manager elevated permissions", Chat.getminiAnnColor() + "(enabled by" + Chat.value(player.getName(), ")"))));
                     seasonmanager.sendMessage(ChatColor.RED + "Abuse of these permission will cause a demotion from your position. These permission are only to be used in an emergency or other season manager-related tasks. Do /help for a list of elevated commands.");
                     System.out.println("WARNING: " + player.getName() + " has enabled Elevated Season Manager permissions.");
                 }
