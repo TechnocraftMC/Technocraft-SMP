@@ -26,8 +26,10 @@ public class Updater implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
+        //Default restart time = 10 seconds
         Long secondsUntilRestartSet = 10L;
 
+        //Make sure command is valid
         if (args.length == 1)
         {
             try
@@ -43,15 +45,16 @@ public class Updater implements CommandExecutor {
         final Long secondsUntilRestart = secondsUntilRestartSet;
         sender.sendMessage("You have initiated a network restart.");
 
-        String secondsDisplay = null;
+        //
+        String timeDisplay = null;
         String unitsDisplay = null;
         if (secondsUntilRestart >= 60)
         {
-            secondsDisplay = secondsToString(Math.toIntExact(secondsUntilRestart));
-                unitsDisplay = "MINUTES";
+            timeDisplay = secondsToString(Math.toIntExact(secondsUntilRestart));
+            unitsDisplay = "MINUTES";
         } else
         {
-            secondsDisplay = String.valueOf(secondsUntilRestart);
+            timeDisplay = String.valueOf(secondsUntilRestart);
             unitsDisplay = "SECONDS";
         }
 
@@ -59,8 +62,8 @@ public class Updater implements CommandExecutor {
         {
             p.getWorld().playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1F, 1F);
         }
-        AnnounceCommand.announceMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "SERVER RESTART", "SERVER RESTART IN " + secondsUntilRestart + " " + unitsDisplay + "...", Bukkit.getOnlinePlayers());
-        GlobalCommand.chatAnnounceMessage("" + ChatColor.BOLD + "SERVER RESTART IN " + secondsDisplay + " " + unitsDisplay + "!", new ArrayList<>(Bukkit.getOnlinePlayers()), null);
+        AnnounceCommand.announceMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "SERVER RESTART", "SERVER RESTART IN " + timeDisplay + " " + unitsDisplay + "...", Bukkit.getOnlinePlayers());
+        GlobalCommand.chatAnnounceMessage("" + ChatColor.BOLD + "SERVER RESTART IN " + timeDisplay + " " + unitsDisplay + "!", new ArrayList<>(Bukkit.getOnlinePlayers()), null);
 
 
         //x-5 seconds in
