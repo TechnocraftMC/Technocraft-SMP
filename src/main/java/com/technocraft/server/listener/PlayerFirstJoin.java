@@ -1,7 +1,6 @@
 package com.technocraft.server.listener;
 
 import com.connorlinfoot.titleapi.TitleAPI;
-import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import com.earth2me.essentials.Essentials;
 import com.technocraft.server.Main;
 import org.bukkit.Bukkit;
@@ -13,10 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.util.Vector;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerFirstJoin implements Listener, CommandExecutor {
     private Main main;
@@ -48,14 +43,14 @@ public class PlayerFirstJoin implements Listener, CommandExecutor {
                 {
                     TitleAPI.sendTitle(player, 0, 100, 0, ChatColor.AQUA + "Welcome to ", ChatColor.GOLD + "" + ChatColor.BOLD + "Technocraft");
                     player.sendMessage(ChatColor.GOLD + "----- Technocraft Welcome -----");
-                    player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "Thank you for joining " + ChatColor.AQUA + "" + ChatColor.BOLD + "Technocraft's EcoSMP" + ChatColor.WHITE + "!");
+                    player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "Thank you for joining " + ChatColor.AQUA + "" + ChatColor.BOLD + "Technocraft's SMP" + ChatColor.WHITE + "!");
                 }
             }, toTicks(1));
             Bukkit.getScheduler().runTaskLater(main, new Runnable() {
                 @Override
                 public void run()
                 {
-                    TitleAPI.sendTitle(player, 0, 100, 0, ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "This season", "Technocraft is doing an " + ChatColor.AQUA + "Economy SMP");
+                    TitleAPI.sendTitle(player, 0, 100, 0, ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "This season", "Technocraft is doing a simple " + ChatColor.AQUA + "SMP");
                     player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "This season Technocraft is doing an " + ChatColor.AQUA + "" + ChatColor.BOLD + "Economy SMP" + ChatColor.WHITE + "!");
                 }
             }, toTicks(6));
@@ -64,7 +59,7 @@ public class PlayerFirstJoin implements Listener, CommandExecutor {
                 public void run()
                 {
                     TitleAPI.sendTitle(player, 0, 100, 0, ChatColor.GOLD + "How to play?", "Do " + ChatColor.GOLD + "/help" + ChatColor.WHITE + " for a list of economy commands!");
-                    player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "Do " + ChatColor.GOLD + "/help" + ChatColor.WHITE + " for a list of economy-related commands! Then," + ChatColor.AQUA + " build your base" + ChatColor.WHITE + "," + ChatColor.AQUA + " gain resources" + ChatColor.WHITE + "," + ChatColor.AQUA + " build amazing things" + ChatColor.WHITE + ", and" + ChatColor.AQUA + " have fun" + ChatColor.WHITE + "!");
+                    player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "Check out the Discord and contact anand#0001 for help with and questions about the new season. Then," + ChatColor.AQUA + " build your base" + ChatColor.WHITE + "," + ChatColor.AQUA + " gain resources" + ChatColor.WHITE + "," + ChatColor.AQUA + " build amazing things" + ChatColor.WHITE + ", and" + ChatColor.AQUA + " have fun" + ChatColor.WHITE + "!");
                     player.sendMessage(ChatColor.GOLD + "----- Thanks for reading! -----");
                 }
             }, toTicks(11));

@@ -1,14 +1,18 @@
 package com.technocraft.server;
 
 import com.technocraft.server.commands.*;
-import com.technocraft.server.listener.DeathEvent;
-import com.technocraft.server.listener.KitListener;
-import com.technocraft.server.listener.PlayerFirstJoin;
-import com.technocraft.server.listener.ServerPingEvent;
+import com.technocraft.server.listener.*;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.security.auth.login.LoginException;
+
 public class Main extends JavaPlugin {
+
+    private JDA jda;
+
     @Override
     public void onEnable()
     {
@@ -26,11 +30,26 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);
         Bukkit.getPluginManager().registerEvents(new SuperChat(), this);
-        Bukkit.getPluginManager().registerEvents(new KitListener(), this);
         Bukkit.getPluginManager().registerEvents(new ServerPingEvent(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoin(this), this);
+        Bukkit.getPluginManager().registerEvents(new ChatToDiscord(), this);
+
+
+        try
+        {
+            jda = JDABuilder.createDefault("NjAxODA4NjEwMjIxMjI4MDMy.XTHr8Q.b2Q-tXhyIJ9JSiTJB-B4d4mKqfk").build();
+            jda.addEventListener(new DiscordToChat());
+        } catch (LoginException e)
+        {
+            e.printStackTrace();
+        }
 
         System.out.println("Technocraft Core has been enabled!");
+    }
+
+    public JDA getJDA()
+    {
+        return jda;
     }
 
     @Override
