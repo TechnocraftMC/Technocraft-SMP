@@ -5,27 +5,43 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 public class DiscordToChat extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e)
     {
-        DiscordUtils utils = new DiscordUtils();
-        if (e.getGuild().equals(utils.getGuildID()))
+        if (e.getAuthor().isBot())
         {
-            TextChannel channel = e.getGuild().getTextChannelById(utils.getListenerChannelID());
-            if (e.getChannel().equals(channel))
+            return;
+        }
+
+        if (e.getAuthor().isFake())
+        {
+            return;
+        }
+
+        if (e.getMessage().isWebhookMessage())
+        {
+            return;
+        }
+
+        DiscordUtils utils = new DiscordUtils();
+        if (e.getGuild().getIdLong() == utils.getGuildID())
+        {
+            if (e.getChannel().getIdLong() == utils.getListenerChannelID())
             {
                 String prefix = "";
-                if (e.getMember().getRoles().contains(utils.getAdminRoleID()))
+
+                if (e.getMember().getRoles().contains(e.getGuild().getRoleById(utils.getAdminRoleID())))
                 {
                     prefix = "&4[Admin]&f";
-                } else if (e.getMember().getRoles().contains(utils.getSeasonManagerRoleID()))
+                } else if (e.getMember().getRoles().contains(e.getGuild().getRoleById(utils.getSeasonManagerRoleID())))
                 {
                     prefix = "&c[Season Manager]&f";
                 }
 
-                Bukkit.getServer().broadcastMessage(prefix + " " + e.getAuthor().getAsTag() + ": " + e.getMessage().getContentDisplay());
+                Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + e.getAuthor().getAsTag() + "&8: &f" + e.getMessage().getContentDisplay()));
             }
         }
     }

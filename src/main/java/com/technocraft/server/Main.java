@@ -32,7 +32,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new SuperChat(), this);
         Bukkit.getPluginManager().registerEvents(new ServerPingEvent(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoin(this), this);
-        Bukkit.getPluginManager().registerEvents(new ChatToDiscord(), this);
+        Bukkit.getPluginManager().registerEvents(new ChatToDiscord(this), this);
 
 
         try
@@ -55,6 +55,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable()
     {
+        jda.shutdown();
         System.out.println("Technocraft core has been disabled!");
     }
 }
