@@ -26,6 +26,7 @@ public class Main extends JavaPlugin {
         getCommand("superchat").setExecutor(new SuperChat());
         getCommand("updater").setExecutor(new Updater(this));
         getCommand("getadmin").setExecutor(new GetAdminCommand(this));
+        getCommand("debug-firstjoin").setExecutor(new PlayerFirstJoin(this));
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);
@@ -33,7 +34,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ServerPingEvent(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoin(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatToDiscord(this), this);
-
+        Bukkit.getPluginManager().registerEvents(new JoinLeave(this), this);
 
         try
         {

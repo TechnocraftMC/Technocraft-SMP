@@ -40,3 +40,7 @@
     getadmin:
       description: Elevated Season Manager permissions
       permission: group.seasonmanager-users
+    debug-firstjoin:
+      description: DEBUG
+      permission: op
+      permission-message: DEBUG

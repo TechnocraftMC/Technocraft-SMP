@@ -51,7 +51,7 @@ public class PlayerFirstJoin implements Listener, CommandExecutor {
                 public void run()
                 {
                     TitleAPI.sendTitle(player, 0, 100, 0, ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "This season", "Technocraft is doing a simple " + ChatColor.AQUA + "SMP");
-                    player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "This season Technocraft is doing an " + ChatColor.AQUA + "" + ChatColor.BOLD + "Economy SMP" + ChatColor.WHITE + "!");
+                    player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "This season Technocraft is doing a " + ChatColor.AQUA + "" + ChatColor.BOLD + "simple SMP" + ChatColor.WHITE + "!");
                 }
             }, toTicks(6));
             Bukkit.getScheduler().runTaskLater(main, new Runnable() {
@@ -60,9 +60,18 @@ public class PlayerFirstJoin implements Listener, CommandExecutor {
                 {
                     TitleAPI.sendTitle(player, 0, 100, 0, ChatColor.GOLD + "How to play?", "Do " + ChatColor.GOLD + "/help" + ChatColor.WHITE + " for a list of economy commands!");
                     player.sendMessage(ChatColor.BLUE + "> " + ChatColor.WHITE + "Check out the Discord and contact anand#0001 for help with and questions about the new season. Then," + ChatColor.AQUA + " build your base" + ChatColor.WHITE + "," + ChatColor.AQUA + " gain resources" + ChatColor.WHITE + "," + ChatColor.AQUA + " build amazing things" + ChatColor.WHITE + ", and" + ChatColor.AQUA + " have fun" + ChatColor.WHITE + "!");
-                    player.sendMessage(ChatColor.GOLD + "----- Thanks for reading! -----");
                 }
             }, toTicks(11));
+
+            Bukkit.getScheduler().runTaskLater(main, new Runnable() {
+                @Override
+                public void run()
+                {
+                    player.sendMessage(ChatColor.GOLD + "----- Thanks for reading! -----");
+                }
+            }, toTicks(15));
+
+
             Bukkit.getScheduler().runTaskLater(main, new Runnable() {
                 @Override
                 public void run()
@@ -70,7 +79,7 @@ public class PlayerFirstJoin implements Listener, CommandExecutor {
                     essentials.getUser(player.getName()).setGodModeEnabled(false);
                     player.setWalkSpeed(.2f);
                 }
-            }, toTicks(13));
+            }, toTicks(16));
         }
     }
 
@@ -91,7 +100,7 @@ public class PlayerFirstJoin implements Listener, CommandExecutor {
 
         if (args.length == 1)
         {
-            Player target = null;
+            Player target;
             try
             {
                 target = Bukkit.getPlayer(args[0]);
