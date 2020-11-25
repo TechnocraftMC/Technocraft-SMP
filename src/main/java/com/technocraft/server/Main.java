@@ -25,7 +25,7 @@ public class Main extends JavaPlugin {
         getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("superchat").setExecutor(new SuperChat());
         getCommand("updater").setExecutor(new Updater(this));
-        getCommand("getadmin").setExecutor(new GetAdminCommand());
+        getCommand("getadmin").setExecutor(new GetAdminCommand(this));
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);
@@ -55,7 +55,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable()
     {
-        jda.shutdown();
+        jda.shutdownNow();
         System.out.println("Technocraft core has been disabled!");
     }
 }

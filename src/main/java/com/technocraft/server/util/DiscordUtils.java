@@ -22,4 +22,9 @@ public class DiscordUtils {
         return 601804468765327360L;
     }
 
+    public long getAdminLogsChannelID()
+    {
+        return 630136639460605963L;
+    }
+
 }

@@ -1,6 +1,9 @@
 package com.technocraft.server.commands;
 
+import com.technocraft.server.Main;
 import com.technocraft.server.util.Chat;
+import com.technocraft.server.util.DiscordUtils;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,21 +12,33 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class GetAdminCommand implements CommandExecutor {
+
+    private Main main;
+
+    public GetAdminCommand(Main main)
+    {
+        this.main = main;
+    }
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
     {
-        if (!(sender instanceof Player))
+/*        if (!(sender instanceof Player))
         {
             System.out.println("You must be a player to run this command.");
             return false;
         }
 
-        Player player = (Player) sender;
+        Player player = (Player) sender;*/
         if (args.length != 1)
         {
-            player.sendMessage(Chat.help("Get Admin", new String[]{"/getadmin <bool state>"}, new String[]{"Toggle the state of Season Manager's permissions. state = true, false"}));
+            sender.sendMessage(Chat.help("Get Admin", new String[]{"/getadmin <bool state>"}, new String[]{"Toggle the state of Season Manager's permissions. state = true, false"}));
             return false;
         }
+
+        DiscordUtils utils = new DiscordUtils();
+        TextChannel adminLogs = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getAdminLogsChannelID());
 
         if (args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("on"))
         {
@@ -33,11 +48,12 @@ public class GetAdminCommand implements CommandExecutor {
             {
                 if (seasonmanager.hasPermission("group.seasonmanager-users"))
                 {
-                    seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "You now have" + Chat.valueAnn("Technocraft Season Manager elevated permissions", Chat.getminiAnnColor() + "(enabled by" + Chat.value(player.getName(), ")"))));
+                    seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "You now have" + Chat.valueAnn("Technocraft Season Manager elevated permissions", Chat.getminiAnnColor() + "(enabled by" + Chat.value(sender.getName(), ")"))));
                     seasonmanager.sendMessage(ChatColor.RED + "Abuse of these permission will cause a demotion from your position. These permission are only to be used in an emergency or other season manager-related tasks. Do /help for a list of elevated commands.");
-                    System.out.println("WARNING: " + player.getName() + " has enabled Elevated Season Manager permissions.");
                 }
             }
+            System.out.println("WARNING: " + sender.getName() + " has enabled Elevated Season Manager permissions.");
+            adminLogs.sendMessage("@here **" + sender.getName() + "** has enabled **Elevated Season Manager Permissions**.").queue();
             return true;
         } else if (args[0].equalsIgnoreCase("false") || args[0].equalsIgnoreCase("off"))
         {
@@ -48,12 +64,14 @@ public class GetAdminCommand implements CommandExecutor {
                 if (seasonmanager.hasPermission("group.seasonmanager-users"))
                 {
                     seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "Your season manager permissions have" + Chat.valueAnn("expired", ".")));
-                    System.out.println("Elevated Season Manager permissions have expired.");
                 }
             }
+            System.out.println("Elevated Season Manager permissions have expired.");
+            adminLogs.sendMessage("**Elevated Season Manager Permissions** have expired.").queue();
             return true;
-        } else {
-            player.sendMessage(Chat.help("Get Admin", new String[]{"/getadmin <bool state>"}, new String[]{"Toggle the state of Season Manager's permissions. state = true, false"}));
+        } else
+        {
+            sender.sendMessage(Chat.help("Get Admin", new String[]{"/getadmin <bool state>"}, new String[]{"Toggle the state of Season Manager's permissions. state = true, false"}));
             return false;
         }
     }
