@@ -1,5 +1,7 @@
 package com.technocraft.server.util;
 
+import net.dv8tion.jda.api.JDA;
+
 public class DiscordUtils {
 
     public long getGuildID()
@@ -25,6 +27,11 @@ public class DiscordUtils {
     public long getAdminLogsChannelID()
     {
         return 630136639460605963L;
+    }
+
+    public void updateChannelDescription(JDA jda, long channelID, String text)
+    {
+        jda.getGuildById(getGuildID()).getTextChannelById(channelID).getManager().setTopic(text).queue();
     }
 
 }

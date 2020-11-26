@@ -2,6 +2,7 @@ package com.technocraft.server;
 
 import com.technocraft.server.commands.*;
 import com.technocraft.server.listener.*;
+import com.technocraft.server.util.DiscordUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import org.bukkit.Bukkit;
@@ -38,9 +39,12 @@ public class Main extends JavaPlugin {
 
         try
         {
-            jda = JDABuilder.createDefault("NjAxODA4NjEwMjIxMjI4MDMy.XTHr8Q.b2Q-tXhyIJ9JSiTJB-B4d4mKqfk").build();
+            jda = JDABuilder.createDefault("NjAxODA4NjEwMjIxMjI4MDMy.XTHr8Q.b2Q-tXhyIJ9JSiTJB-B4d4mKqfk").build().awaitReady();
             jda.addEventListener(new DiscordToChat());
-        } catch (LoginException e)
+            DiscordUtils utils = new DiscordUtils();
+
+            utils.updateChannelDescription(jda, utils.getListenerChannelID(), "Server starting...");
+        } catch (LoginException | InterruptedException e)
         {
             e.printStackTrace();
         }
@@ -56,7 +60,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable()
     {
-        jda.shutdownNow();
+        DiscordUtils utils = new DiscordUtils();
+        utils.updateChannelDescription(jda, utils.getListenerChannelID(), "SHUTDOWN");
+        jda.shutdown();
         System.out.println("Technocraft core has been disabled!");
     }
 }
