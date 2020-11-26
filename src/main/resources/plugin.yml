@@ -32,7 +32,7 @@
       permission: op
     superchat:
       description: Bold your messages
-      alias: [sc]
+      alias: [!]
       permission: op
     updater:
       description: Schedule server restart
