@@ -16,27 +16,36 @@ public class Silence implements CommandExecutor, Listener {
     public static boolean isSilenced;
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings)
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
     {
+        boolean silentMode = false;
+        if (args[args.length - 1].endsWith("-s"))
+        {
+            silentMode = true;
+        }
         if (!isSilenced)
         {
-            Bukkit.broadcastMessage(ChatColor.DARK_RED + "" + ChatColor.MAGIC + "_" + ChatColor.RED + " The chat has been silenced.");
-            isSilenced = true;
-            for (Player p : Bukkit.getOnlinePlayers())
+            if (!silentMode)
             {
-                if (p.isOp())
-                {
-                    ChatBypass.bypassPlayers.add(p);
-                }
+                Bukkit.broadcastMessage(ChatColor.DARK_RED + "" + ChatColor.MAGIC + "_" + ChatColor.RED + " The chat has been silenced.");
             }
+            isSilenced = true;
+            ChatBypass.bypassPlayers.clear();
         } else
         {
-            Bukkit.broadcastMessage(ChatColor.DARK_GREEN + "" + ChatColor.MAGIC + "_" + ChatColor.GREEN + " The chat has been unsilenced.");
+            if (!silentMode)
+            {
+                Bukkit.broadcastMessage(ChatColor.DARK_GREEN + "" + ChatColor.MAGIC + "_" + ChatColor.GREEN + " The chat has been unsilenced.");
+            }
             isSilenced = false;
         }
-        for (Player p : Bukkit.getOnlinePlayers())
+
+        if (!silentMode)
         {
-            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 2F, 1F);
+            for (Player p : Bukkit.getOnlinePlayers())
+            {
+                p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 2F, 1F);
+            }
         }
         return true;
     }
@@ -59,7 +68,7 @@ public class Silence implements CommandExecutor, Listener {
     {
         if (Silence.isSilenced)
         {
-            if (!ChatBypass.bypassPlayers.contains(Bukkit.getPlayer(e.getSender().getName())))
+            if (!(ChatBypass.bypassPlayers.contains(Bukkit.getPlayer(e.getSender().getName())) && (Bukkit.getPlayer(e.getSender().getName()).isOp())))
             {
                 e.setCancelled(true);
                 e.getSender().sendMessage(ChatColor.RED + "The chat is silenced.");
