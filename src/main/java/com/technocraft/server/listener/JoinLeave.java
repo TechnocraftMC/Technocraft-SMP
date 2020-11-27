@@ -2,6 +2,7 @@ package com.technocraft.server.listener;
 
 import com.technocraft.server.Main;
 import com.technocraft.server.util.DiscordUtils;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,14 +23,14 @@ public class JoinLeave implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e)
     {
-        main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID()).sendMessage(e.getJoinMessage().substring(2)).queue();
-        utils.updateChannelDescription(main.getJDA(), utils.getListenerChannelID(), Bukkit.getOnlinePlayers().size() + " players online");
+        TextChannel logsChannel = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
+        logsChannel.sendMessage("*" + e.getJoinMessage().substring(2) + "\n" + Bukkit.getOnlinePlayers().size() + " players online*").queue();
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e)
     {
-        main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID()).sendMessage(e.getQuitMessage().substring(2)).queue();
-        utils.updateChannelDescription(main.getJDA(), utils.getListenerChannelID(), Bukkit.getOnlinePlayers().size() + " players online");
+        TextChannel logsChannel = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
+        logsChannel.sendMessage("*" + e.getQuitMessage().substring(2) + "\n" + Bukkit.getOnlinePlayers().size() + " players online*").queue();
     }
 }
