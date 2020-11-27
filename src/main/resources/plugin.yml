@@ -12,12 +12,18 @@
   commands:
     announce:
       description: Send global title announcement
+      aliases:
+        - a
       permission: op
     global:
       description: Send global chat announcement
+      aliases:
+        - g
       permission: op
     chatbypass:
       description: Toggle user's chat bypass when the chat is silenced
+      aliases:
+        - sb
       permission: op
     gm:
       description: Toggle gamemode
@@ -32,13 +38,16 @@
       permission: op
     superchat:
       description: Bold your messages
-      alias: z
+      aliases:
+        - z
       permission: op
     updater:
       description: Schedule server restart
       permission: op
     getadmin:
       description: Elevated Season Manager permissions
+      aliases:
+        - ga
       permission: group.seasonmanager-users
     debug-firstjoin:
       description: DEBUG
