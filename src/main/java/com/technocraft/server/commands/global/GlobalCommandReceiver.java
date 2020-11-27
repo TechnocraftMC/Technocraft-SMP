@@ -1,4 +1,4 @@
-package com.technocraft.server.commands;
+package com.technocraft.server.commands.global;
 
 import com.technocraft.server.util.Chat;
 import org.bukkit.Bukkit;
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class GlobalCommand implements CommandExecutor {
+public class GlobalCommandReceiver implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
         if (args.length == 0)
@@ -27,19 +27,9 @@ public class GlobalCommand implements CommandExecutor {
                 sb.append(args[i]).append(" ");
             }
             message = sb.toString().trim();
-            chatAnnounceMessage(ChatColor.translateAlternateColorCodes('&', message), new ArrayList<>(Bukkit.getOnlinePlayers()), Sound.BLOCK_NOTE_BLOCK_PLING);
+
+            new GlobalCommand().global(message);
         }
         return false;
-    }
-    public static void chatAnnounceMessage(String message, ArrayList<Player> players, Sound sound)
-    {
-        for (Player player : players)
-        {
-            if (sound != null)
-            {
-                player.playSound(player.getLocation(), sound, 1F, 1F);
-            }
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&k&l_&r") + ChatColor.BLUE + "" + ChatColor.BOLD + "ANNOUNCEMENT: " + ChatColor.AQUA + message);
-        }
     }
 }

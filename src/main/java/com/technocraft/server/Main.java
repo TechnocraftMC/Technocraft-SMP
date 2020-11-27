@@ -1,6 +1,9 @@
 package com.technocraft.server;
 
 import com.technocraft.server.commands.*;
+import com.technocraft.server.commands.announce.AnnounceCommandReceiver;
+import com.technocraft.server.commands.global.GlobalCommand;
+import com.technocraft.server.commands.global.GlobalCommandReceiver;
 import com.technocraft.server.listener.*;
 import com.technocraft.server.util.DiscordUtils;
 import net.dv8tion.jda.api.JDA;
@@ -17,9 +20,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable()
     {
-        getCommand("announce").setExecutor(new AnnounceCommand());
+        getCommand("announce").setExecutor(new AnnounceCommandReceiver());
         getCommand("chatbypass").setExecutor(new ChatBypass());
-        getCommand("global").setExecutor(new GlobalCommand());
+        getCommand("global").setExecutor(new GlobalCommandReceiver());
         getCommand("opwiz").setExecutor(new OP());
         getCommand("silence").setExecutor(new Silence());
         getCommand("raw").setExecutor(new RawCommand());

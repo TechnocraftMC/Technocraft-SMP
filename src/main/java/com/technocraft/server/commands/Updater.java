@@ -1,6 +1,8 @@
 package com.technocraft.server.commands;
 
 import com.technocraft.server.Main;
+import com.technocraft.server.commands.announce.AnnounceCommand;
+import com.technocraft.server.commands.global.GlobalCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -11,7 +13,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class Updater implements CommandExecutor {
@@ -62,9 +63,11 @@ public class Updater implements CommandExecutor {
         {
             p.getWorld().playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1F, 1F);
         }
-        AnnounceCommand.announceMessage(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "SERVER RESTART", "SERVER RESTART IN " + timeDisplay + " " + unitsDisplay + "...", Bukkit.getOnlinePlayers());
-        GlobalCommand.chatAnnounceMessage("" + ChatColor.BOLD + "SERVER RESTART IN " + timeDisplay + " " + unitsDisplay + "!", new ArrayList<>(Bukkit.getOnlinePlayers()), null);
 
+        new AnnounceCommand().announce(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "SERVER RESTART", "SERVER RESTART IN " + timeDisplay + " " + unitsDisplay + "...");
+        new GlobalCommand().global("" + ChatColor.BOLD + "SERVER RESTART IN " + timeDisplay + " " + unitsDisplay + "!");
+
+        GlobalCommand global = new GlobalCommand(Sound.ENTITY_ENDER_DRAGON_GROWL);
 
         //x-5 seconds in
         Bukkit.getScheduler().runTaskLater(main, new Runnable() {
@@ -81,11 +84,7 @@ public class Updater implements CommandExecutor {
         Bukkit.getScheduler().runTaskLater(main, new Runnable() {
             public void run()
             {
-                for (Player p : Bukkit.getOnlinePlayers())
-                {
-                    GlobalCommand.chatAnnounceMessage("Server restart in 10 seconds...", new ArrayList<>(Collections.singletonList(p)), null);
-                    p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1F, 1F);
-                }
+                global.global("Server restart in 10 seconds...");
             }
         }, toTicks(secondsUntilRestart - 5L));
 
@@ -94,11 +93,7 @@ public class Updater implements CommandExecutor {
         Bukkit.getScheduler().runTaskLater(main, new Runnable() {
             public void run()
             {
-                for (Player p : Bukkit.getOnlinePlayers())
-                {
-                    GlobalCommand.chatAnnounceMessage("Server restart in 5 seconds...", new ArrayList<>(Collections.singletonList(p)), null);
-                    p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1F, 1F);
-                }
+                global.global("Server restart in 5 seconds...");
             }
         }, toTicks(secondsUntilRestart));
 
