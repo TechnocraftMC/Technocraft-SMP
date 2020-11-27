@@ -61,7 +61,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable()
     {
-        jda.shutdown();
+        jda.shutdownNow();
         System.out.println("Technocraft core has been disabled!");
     }
 }
