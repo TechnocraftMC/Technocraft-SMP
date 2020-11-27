@@ -19,9 +19,13 @@ public class Silence implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
     {
         boolean silentMode = false;
-        if (args[args.length - 1].endsWith("-s"))
+
+        if (args.length > 0)
         {
-            silentMode = true;
+            if (args[args.length - 1].endsWith("-s"))
+            {
+                silentMode = true;
+            }
         }
         if (!isSilenced)
         {
