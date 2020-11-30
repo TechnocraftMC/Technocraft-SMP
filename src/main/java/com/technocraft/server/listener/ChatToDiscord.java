@@ -21,7 +21,10 @@ public class ChatToDiscord implements Listener {
     @EventHandler
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e)
     {
-        DiscordUtils utils = new DiscordUtils();
-        main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID()).sendMessage(e.getPlayer().getName() + ": " + e.getMessage()).queue();
+        if (!e.isCancelled())
+        {
+            DiscordUtils utils = new DiscordUtils();
+            main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID()).sendMessage(e.getPlayer().getName() + ": " + e.getMessage()).queue();
+        }
     }
 }
