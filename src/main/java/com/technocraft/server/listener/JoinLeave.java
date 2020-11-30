@@ -31,6 +31,6 @@ public class JoinLeave implements Listener {
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         TextChannel logsChannel = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
-        logsChannel.sendMessage("*" + e.getQuitMessage().substring(2) + "\n" + Bukkit.getOnlinePlayers().size() + " players online*").queue();
+        logsChannel.sendMessage("*" + e.getQuitMessage().substring(2) + "\n" + (Bukkit.getOnlinePlayers().size() - 1)+ " players online*").queue();
     }
 }
