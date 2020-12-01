@@ -39,6 +39,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoin(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatToDiscord(this), this);
         Bukkit.getPluginManager().registerEvents(new JoinLeave(this), this);
+        Bukkit.getPluginManager().registerEvents(new CommandListener(this), this);
 
         try
         {
