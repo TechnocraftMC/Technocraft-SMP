@@ -72,10 +72,13 @@ public class Silence implements CommandExecutor, Listener {
     {
         if (Silence.isSilenced)
         {
-            if (!(ChatBypass.bypassPlayers.contains(Bukkit.getPlayer(e.getSender().getName()))) || Bukkit.getPlayer(e.getSender().getName()).isOp())
+            if (!(ChatBypass.bypassPlayers.contains(Bukkit.getPlayer(e.getSender().getName()))))
             {
-                e.setCancelled(true);
-                e.getSender().sendMessage(ChatColor.RED + "The chat is silenced.");
+                if (!Bukkit.getPlayer(e.getSender().getName()).isOp())
+                {
+                    e.setCancelled(true);
+                    e.getSender().sendMessage(ChatColor.RED + "The chat is silenced.");
+                }
             }
         }
     }
