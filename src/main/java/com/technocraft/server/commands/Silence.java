@@ -57,14 +57,17 @@ public class Silence implements CommandExecutor, Listener {
     @EventHandler
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e)
     {
-         if (Silence.isSilenced)
-         {
-             if (!(ChatBypass.bypassPlayers.contains(e.getPlayer())))
-             {
-                 e.setCancelled(true);
-                 e.getPlayer().sendMessage(ChatColor.RED + "The chat is silenced.");
-             }
-         }
+        if (Silence.isSilenced)
+        {
+            if (!(ChatBypass.bypassPlayers.contains(e.getPlayer())))
+            {
+                if (!e.getPlayer().isOp())
+                {
+                    e.setCancelled(true);
+                    e.getPlayer().sendMessage(ChatColor.RED + "The chat is silenced.");
+                }
+            }
+        }
     }
 
     @EventHandler
