@@ -1,8 +1,10 @@
 package com.technocraft.server.listener;
 
 import com.technocraft.server.Main;
+import com.technocraft.server.listener.seasonmanager.SMChat;
 import com.technocraft.server.util.Chat;
 import com.technocraft.server.util.DiscordUtils;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -24,7 +26,17 @@ public class ChatToDiscord implements Listener {
         if (!e.isCancelled())
         {
             DiscordUtils utils = new DiscordUtils();
-            main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID()).sendMessage(e.getPlayer().getName() + ": " + e.getMessage()).queue();
+
+            TextChannel normal = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
+            TextChannel sm = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getSeasonPlannerChannelID());
+            String message = e.getPlayer().getName() + ": " + e.getMessage();
+            if (SMChat.toggledChat.contains(e.getPlayer()))
+            {
+                sm.sendMessage(message).queue();
+            } else
+            {
+                normal.sendMessage(message).queue();
+            }
         }
     }
 }

@@ -2,16 +2,17 @@ package com.technocraft.server;
 
 import com.technocraft.server.commands.*;
 import com.technocraft.server.commands.announce.AnnounceCommandReceiver;
-import com.technocraft.server.commands.global.GlobalCommand;
 import com.technocraft.server.commands.global.GlobalCommandReceiver;
 import com.technocraft.server.listener.*;
-import com.technocraft.server.util.DiscordUtils;
+import com.technocraft.server.listener.seasonmanager.SMChat;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
+import java.io.IOException;
 
 public class Main extends JavaPlugin {
 
@@ -31,6 +32,7 @@ public class Main extends JavaPlugin {
         getCommand("updater").setExecutor(new Updater(this));
         getCommand("getadmin").setExecutor(new GetAdminCommand(this));
         getCommand("debug-firstjoin").setExecutor(new PlayerFirstJoin(this));
+        getCommand("sc").setExecutor(new SMChat());
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);
@@ -40,6 +42,22 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ChatToDiscord(this), this);
         Bukkit.getPluginManager().registerEvents(new JoinLeave(this), this);
         Bukkit.getPluginManager().registerEvents(new CommandListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new SMChat(), this);
+
+
+        File logs = new File(this.getDataFolder().getPath() + "/data.txt");
+        if (!logs.exists())
+        {
+            try
+            {
+                logs.createNewFile();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        Bukkit.getPluginManager().registerEvents(new DamageListener(logs), this);
 
         try
         {

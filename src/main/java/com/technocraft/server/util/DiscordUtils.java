@@ -26,4 +26,7 @@ public class DiscordUtils {
     {
         return 630136639460605963L;
     }
+
+    public long getSeasonPlannerChannelID() { return 627346165993701386L; }
+
 }

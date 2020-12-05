@@ -136,6 +136,13 @@ public class Chat {
     }
 
 
+    //SEASON MANAGER
+
+
+    public static String getSMPrefix() { return ChatColor.translateAlternateColorCodes('&', "&b&lManager" + getBodyColor()); }
+
+
+
 
 }
 enum BodyType {
