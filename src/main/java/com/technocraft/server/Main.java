@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new SMChat(), this);
 
 
-        File logs = new File(this.getDataFolder().getPath() + "/data.txt");
+        /*File logs = new File(this.getDataFolder().getPath() + "/data.txt");
         if (!logs.exists())
         {
             try
@@ -57,7 +57,7 @@ public class Main extends JavaPlugin {
             }
         }
 
-        Bukkit.getPluginManager().registerEvents(new DamageListener(logs), this);
+        Bukkit.getPluginManager().registerEvents(new DamageListener(logs), this);*/
 
         try
         {
