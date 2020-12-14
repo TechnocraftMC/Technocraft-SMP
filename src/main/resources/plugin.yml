@@ -14,12 +14,12 @@
       description: Send global title announcement
       aliases:
         - a
-      permission: op
+      permission: seasonmanager-perms
     global:
       description: Send global chat announcement
       aliases:
         - g
-      permission: op
+      permission: seasonmanager-perms
     chatbypass:
       description: Toggle user's chat bypass when the chat is silenced
       aliases:
@@ -35,12 +35,12 @@
       permission: op
     silence:
       description: Silence the chat
-      permission: op
+      permission: seasonmanager-perms
     superchat:
       description: Bold your messages
       aliases:
         - z
-      permission: op
+      permission: seasonmanager-perms
     updater:
       description: Schedule server restart
       permission: op
@@ -56,3 +56,6 @@
     sc:
       description: Toggle Season Manager Chat
       permission: group.seasonmanager-users
+    revert:
+      description: Revert an inventory to before death
+      permission: group.seasonmanager-perms

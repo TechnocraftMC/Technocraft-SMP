@@ -11,8 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.security.auth.login.LoginException;
-import java.io.File;
-import java.io.IOException;
 
 public class Main extends JavaPlugin {
 
@@ -30,6 +28,7 @@ public class Main extends JavaPlugin {
         getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("superchat").setExecutor(new SuperChat());
         getCommand("updater").setExecutor(new Updater(this));
+        getCommand("revert").setExecutor(new InventoryRevert());
         getCommand("getadmin").setExecutor(new GetAdminCommand(this));
         getCommand("debug-firstjoin").setExecutor(new PlayerFirstJoin(this));
         getCommand("sc").setExecutor(new SMChat());
@@ -40,6 +39,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ServerPingEvent(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoin(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatToDiscord(this), this);
+        Bukkit.getPluginManager().registerEvents(new InventoryRevert(), this);
         Bukkit.getPluginManager().registerEvents(new JoinLeave(this), this);
         Bukkit.getPluginManager().registerEvents(new CommandListener(this), this);
         Bukkit.getPluginManager().registerEvents(new SMChat(), this);
