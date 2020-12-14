@@ -80,14 +80,14 @@ public class InventoryRevert implements CommandExecutor, Listener {
 
 
 
-
+/*
                 for (ItemStack itemStack : inventory.getInventory())
                 {
 
                     player.getInventory().addItem(new Item
 
                 }
-                //inventory.getInventory().clear();
+                //inventory.getInventory().clear();*/
 
 
 
