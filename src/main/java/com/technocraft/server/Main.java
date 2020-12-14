@@ -34,7 +34,7 @@ public class Main extends JavaPlugin {
         getCommand("sc").setExecutor(new SMChat());
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
-        Bukkit.getPluginManager().registerEvents(new DeathEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new DeathEvent(this), this);
         Bukkit.getPluginManager().registerEvents(new SuperChat(), this);
         Bukkit.getPluginManager().registerEvents(new ServerPingEvent(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerFirstJoin(this), this);

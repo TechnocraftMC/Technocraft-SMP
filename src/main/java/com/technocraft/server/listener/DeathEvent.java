@@ -1,5 +1,8 @@
 package com.technocraft.server.listener;
 
+import com.technocraft.server.Main;
+import com.technocraft.server.util.DiscordUtils;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -10,9 +13,21 @@ import org.bukkit.inventory.ItemStack;
 
 public class DeathEvent implements Listener {
 
+    private Main main;
+
+    public DeathEvent(Main main)
+    {
+        this.main = main;
+    }
+
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e)
     {
+
+        DiscordUtils utils = new DiscordUtils();
+        TextChannel adminLogs = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getAdminLogsChannelID());
+
+
         Player target = e.getEntity();
         StringBuilder stringBuilder = new StringBuilder();
         StringBuilder message = new StringBuilder();
@@ -36,6 +51,7 @@ public class DeathEvent implements Listener {
                 p.sendMessage(finalMessage);
             }
         }
+        adminLogs.sendMessage(finalMessage);
         System.out.println(finalMessage);
     }
 }
