@@ -59,8 +59,5 @@ public class SMChat implements CommandExecutor, Listener {
             }
 
         }
-
-
     }
-
 }
