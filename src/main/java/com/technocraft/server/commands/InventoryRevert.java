@@ -1,32 +1,31 @@
 package com.technocraft.server.commands;
 
-import com.google.common.io.LittleEndianDataInputStream;
+import com.technocraft.server.Main;
 import com.technocraft.server.util.Chat;
 import com.technocraft.server.util.TechnoInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Item;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 public class InventoryRevert implements CommandExecutor, Listener {
 
     private static ArrayList<TechnoInventory> inventories = new ArrayList<>();
+    private Main main;
 
+    public InventoryRevert(Main main)
+    {
+        this.main = main;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
@@ -54,7 +53,6 @@ public class InventoryRevert implements CommandExecutor, Listener {
         }
 
 
-
         Player player;
 
         try
@@ -79,16 +77,21 @@ public class InventoryRevert implements CommandExecutor, Listener {
                 }
 
 
-
-/*
                 for (ItemStack itemStack : inventory.getInventory())
                 {
-
-                    player.getInventory().addItem(new Item
-
+                    if (itemStack != null)
+                    {
+                        try
+                        {
+                            player.getInventory().addItem(itemStack);
+                        } catch (IllegalArgumentException e)
+                        {
+                            System.out.println(e.getCause());
+                        }
+                    }
                 }
-                //inventory.getInventory().clear();*/
 
+                //inventory.removeDrops();
 
 
                 if (doTeleport)
@@ -116,8 +119,7 @@ public class InventoryRevert implements CommandExecutor, Listener {
     }
 
     /**
-     *
-     * @param player The player who will have their past death's flushed
+     * @param player     The player who will have their past death's flushed
      * @param startIndex Will clear all instances of player before the startIndex (exclusively)
      */
     private void flushList(Player player, int startIndex)
@@ -136,7 +138,15 @@ public class InventoryRevert implements CommandExecutor, Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e)
     {
-        inventories.add(new TechnoInventory(e.getEntity(), e.getDrops(), e.getEntity().getLocation(), e.getDroppedExp()));
+        e.setKeepInventory(true);
+        inventories.add(new TechnoInventory(e.getEntity(), e.getEntity().getInventory().getContents(), e.getEntity().getLocation(), e.getDrops()));
+        e.getEntity().getInventory().clear();
+        for (ItemStack stack : e.getDrops())
+        {
+            Entity stack1 = (Entity)stack;
+            stack1.remove();
+        }
+
     }
 
 }

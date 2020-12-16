@@ -3,13 +3,19 @@ package com.technocraft.server.listener;
 import com.technocraft.server.Main;
 import com.technocraft.server.util.DiscordUtils;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.md_5.bungee.api.chat.ClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.awt.*;
+import java.awt.event.TextListener;
+import java.util.Map;
 
 public class DeathEvent implements Listener {
 
@@ -32,10 +38,27 @@ public class DeathEvent implements Listener {
         StringBuilder stringBuilder = new StringBuilder();
         StringBuilder message = new StringBuilder();
 
+        String enchants = "";
         for (ItemStack item : e.getDrops())
         {
-            message.append(item.getAmount() + "x " + item.getType().toString().replace("LEGACY_", "") + ", ");
+            for (Map.Entry mapElement : item.getEnchantments().entrySet()) {
+                Enchantment key = (Enchantment) mapElement.getKey();
+
+                int value = ((int) mapElement.getValue());
+                enchants += key.getKey().getKey() + " " + value + ", ";
+            }
+            enchants = enchants.trim();
+
+            if (!item.getEnchantments().isEmpty())
+            {
+                message.append(item.getAmount() + "x " + item.getType().toString().replace("LEGACY_", "") + " (" + enchants + "), ");
+            } else
+            {
+                message.append(item.getAmount() + "x " + item.getType().toString().replace("LEGACY_", "") + ", ");
+            }
         }
+
+
 
         stringBuilder.append(ChatColor.YELLOW + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ChatColor.BOLD + "'s Death: \n");
         stringBuilder.append(ChatColor.WHITE + "- Location: " + ChatColor.YELLOW + target.getLocation().getX() + " " + target.getLocation().getY() + " " + target.getLocation().getZ() + "\n");
@@ -51,7 +74,7 @@ public class DeathEvent implements Listener {
                 p.sendMessage(finalMessage);
             }
         }
-        adminLogs.sendMessage(finalMessage);
+        adminLogs.sendMessage(finalMessage).queue();
         System.out.println(finalMessage);
     }
 }

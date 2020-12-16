@@ -2,28 +2,27 @@ package com.technocraft.server.util;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class TechnoInventory {
 
     private Player player;
-    private List<ItemStack> inventory;
+    private ItemStack[] inventory;
     private Location location;
-    private int exp;
+    private List<ItemStack> drops;
 
-    public TechnoInventory(Player player, List<ItemStack> inventory, Location location, int exp)
+    public TechnoInventory(Player player, ItemStack[] inventory, Location location, List<ItemStack> drops)
     {
         this.player = player;
         this.inventory = inventory;
         this.location = location;
-        this.exp = exp;
+        this.drops = drops;
+
     }
 
-    public List<ItemStack> getInventory()
+    public ItemStack[] getInventory()
     {
         return inventory;
     }
@@ -38,9 +37,7 @@ public class TechnoInventory {
         return location;
     }
 
-
-    public int getExp()
+    public void removeDrops()
     {
-        return exp;
     }
 }
