@@ -138,13 +138,15 @@ public class InventoryRevert implements CommandExecutor, Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e)
     {
-        e.setKeepInventory(true);
-        inventories.add(new TechnoInventory(e.getEntity(), e.getEntity().getInventory().getContents(), e.getEntity().getLocation(), e.getDrops()));
-        e.getEntity().getInventory().clear();
-        for (ItemStack stack : e.getDrops())
+        if (!e.getKeepInventory())
         {
-            Entity stack1 = (Entity)stack;
-            stack1.remove();
+            e.setKeepInventory(true);
+            inventories.add(new TechnoInventory(e.getEntity(), e.getEntity().getInventory().getContents(), e.getEntity().getLocation(), e.getDrops()));
+
+            if (!e.getEntity().isOp())
+            {
+                e.getEntity().getInventory().clear();
+            }
         }
 
     }
