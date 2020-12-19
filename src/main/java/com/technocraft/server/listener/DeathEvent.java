@@ -5,6 +5,7 @@ import com.technocraft.server.util.DiscordUtils;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,7 +35,10 @@ public class DeathEvent implements Listener {
 
         for (ItemStack item : e.getDrops())
         {
-            message.append(item.getAmount() + "x " + item.getType().toString().replace("LEGACY_", "") + ", ");
+            if (!item.getType().equals(Material.AIR))
+            {
+                message.append(item.getAmount() + "x " + item.getType().toString().replace("LEGACY_", "") + ", ");
+            }
         }
 
         stringBuilder.append(ChatColor.YELLOW + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ChatColor.BOLD + "'s Death: \n");
