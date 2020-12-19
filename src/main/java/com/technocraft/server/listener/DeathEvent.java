@@ -74,7 +74,8 @@ public class DeathEvent implements Listener {
                 p.sendMessage(finalMessage);
             }
         }
-        adminLogs.sendMessage(finalMessage).queue();
+
         System.out.println(finalMessage);
+        adminLogs.sendMessage(finalMessage).queue();
     }
 }

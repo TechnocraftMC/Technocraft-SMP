@@ -26,7 +26,7 @@ public class ChatToDiscord implements Listener {
         this.main = main;
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e)
     {
         if (!e.isCancelled())
