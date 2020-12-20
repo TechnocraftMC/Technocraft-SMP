@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ public class SMChat implements CommandExecutor, Listener {
 
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings)
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings)
     {
         Player player = (Player) commandSender;
         if (toggledChat.contains(player))
@@ -32,7 +31,7 @@ public class SMChat implements CommandExecutor, Listener {
             toggledChat.add(player);
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + " &fYou have &aenabled " + Chat.getValueColor() + "Season Manager Chat" + Chat.getBodyColor() + "."));
         }
-            return false;
+        return false;
     }
 
     @EventHandler

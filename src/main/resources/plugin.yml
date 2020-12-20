@@ -1,13 +1,11 @@
   name: Technocraft-SMP
   version: 1.0
   description: The Technocraft SMP Core
-  # We could place every author in the authors list, but chose not to for illustrative purposes
-  # Also, having an author distinguishes that person as the project lead, and ensures their
-  # name is displayed first
   authors: [Wiz_Techno, Technocraft]
 
   main: com.technocraft.server.Main
   depend: [TitleAPI, Essentials]
+  api-version: 1.16
 
   commands:
     announce:

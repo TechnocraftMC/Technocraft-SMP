@@ -4,11 +4,9 @@ import com.technocraft.server.Main;
 import com.technocraft.server.util.Chat;
 import com.technocraft.server.util.TechnoInventory;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -110,9 +108,8 @@ public class InventoryRevert implements CommandExecutor, Listener {
                 return false;
 
             }
-
-            sender.sendMessage("Player does not have their inventory stored");
         }
+        sender.sendMessage("Player does not have their inventory stored");
 
 
         return false;
