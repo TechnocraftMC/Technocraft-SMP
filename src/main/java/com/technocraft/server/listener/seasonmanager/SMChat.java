@@ -1,5 +1,6 @@
 package com.technocraft.server.listener.seasonmanager;
 
+import com.technocraft.server.Main;
 import com.technocraft.server.util.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,6 +18,13 @@ public class SMChat implements CommandExecutor, Listener {
 
     public static ArrayList<Player> toggledChat = new ArrayList<>();
 
+    private Main main;
+
+    public SMChat(Main main)
+    {
+        this.main = main;
+        actionBar(main);
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings)
@@ -58,5 +66,28 @@ public class SMChat implements CommandExecutor, Listener {
             }
 
         }
+    }
+
+    private static void actionBar(Main main)
+    {
+        Bukkit.getScheduler().runTaskTimer(main, new Runnable() {
+            @Override
+            public void run()
+            {
+                for (Player p : toggledChat)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Bukkit.getScheduler().runTaskLater(main, new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                p.sendActionBar(ChatColor.translateAlternateColorCodes('&', "&c[Management] &6Season Manager Chat &8is enabled."));
+                            }
+                        }, i * 20L);
+                    }
+                }
+            }
+        }, 0L, 20L * 20);
     }
 }

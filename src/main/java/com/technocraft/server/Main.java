@@ -31,7 +31,7 @@ public class Main extends JavaPlugin {
         getCommand("revert").setExecutor(new InventoryRevert(this));
         getCommand("getadmin").setExecutor(new GetAdminCommand(this));
         getCommand("debug-firstjoin").setExecutor(new PlayerFirstJoin(this));
-        getCommand("sc").setExecutor(new SMChat());
+        getCommand("sc").setExecutor(new SMChat(this));
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(this), this);
@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new InventoryRevert(this), this);
         Bukkit.getPluginManager().registerEvents(new JoinLeave(this), this);
         Bukkit.getPluginManager().registerEvents(new CommandListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new SMChat(), this);
+        Bukkit.getPluginManager().registerEvents(new SMChat(this), this);
 
 
         /*File logs = new File(this.getDataFolder().getPath() + "/data.txt");

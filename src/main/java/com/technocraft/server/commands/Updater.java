@@ -83,10 +83,11 @@ public class Updater implements CommandExecutor {
         }
 
 
-        new AnnounceCommand().announce(ChatColor.BOLD + getAction(true), getAction(false) + " IN " + ChatColor.GOLD + timeDisplay + " " + unitsDisplay + ChatColor.WHITE + "...");
-        new GlobalCommand().global("" + ChatColor.BOLD + getAction(false) + " IN " + timeDisplay + " " + unitsDisplay + "!");
+        new AnnounceCommand().announce(getAction(true, true), getAction(false, false) + " IN " + ChatColor.GOLD + timeDisplay + " " + unitsDisplay + ChatColor.WHITE + "...");
+        new GlobalCommand().global(getAction(false, false) + " IN " + timeDisplay + " " + unitsDisplay + "!");
 
         GlobalCommand global = new GlobalCommand(Sound.ENTITY_ENDER_DRAGON_GROWL);
+
 
 
         //1 minute warning
@@ -100,6 +101,18 @@ public class Updater implements CommandExecutor {
                     actionBar(1, "MINUTE");
                 }
             }, toTicks(secondsUntilRestart - 60));
+        }
+
+        //2 minute warning
+        if (secondsUntilRestart - 120 > 10)
+        {
+            Bukkit.getScheduler().runTaskLater(main, new Runnable() {
+                @Override
+                public void run()
+                {
+                    actionBar(2, "MINUTE");
+                }
+            }, toTicks(secondsUntilRestart - 120));
         }
 
 
@@ -206,15 +219,15 @@ public class Updater implements CommandExecutor {
         return String.format("%02d:%02d", pTime / 60, pTime % 60);
     }
 
-    private String getAction(boolean getColorCodes)
+    private String getAction(boolean getColorCodes, boolean doBold)
     {
         String action;
         if (getColorCodes)
         {
-            action = "" + ChatColor.DARK_PURPLE + "SERVER RESTART";
+            action = "" + ChatColor.DARK_PURPLE + (doBold ? ChatColor.BOLD : "") + "SERVER RESTART";
             if (isShutdown)
             {
-                action = "" + ChatColor.RED + "SERVER SHUTDOWN";
+                action = "" + ChatColor.RED  + (doBold ? ChatColor.BOLD : "") + "SERVER SHUTDOWN";
             }
         } else
         {
@@ -240,13 +253,13 @@ public class Updater implements CommandExecutor {
     {
         for (Player p : Bukkit.getOnlinePlayers())
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Bukkit.getScheduler().runTaskLater(main, new Runnable() {
                     @Override
                     public void run()
                     {
-                        p.sendActionBar(getAction(true) + ChatColor.WHITE + " IN " + ChatColor.GOLD + time + " " + ChatColor.WHITE + timeunit);
+                        p.sendActionBar(getAction(true, true) + ChatColor.WHITE + " IN " + ChatColor.GOLD + "" + ChatColor.BOLD + time + " " + ChatColor.WHITE + "" + ChatColor.BOLD + timeunit);
                     }
                 }, toTicks(i));
             }
