@@ -4,7 +4,7 @@
   authors: [Wiz_Techno, Technocraft]
 
   main: com.technocraft.server.Main
-  depend: [TitleAPI, Essentials]
+  depend: [TitleAPI, Essentials, WorldGuard]
   api-version: 1.16
 
   commands:
@@ -57,3 +57,8 @@
     revert:
       description: Revert an inventory to before death
       permission: group.seasonmanager-perms
+    manager:
+      description: Control manager flags
+      permission: group.seasonmanager-perms
+      aliases:
+        - mf

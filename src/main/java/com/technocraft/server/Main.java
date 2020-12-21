@@ -32,6 +32,7 @@ public class Main extends JavaPlugin {
         getCommand("getadmin").setExecutor(new GetAdminCommand(this));
         getCommand("debug-firstjoin").setExecutor(new PlayerFirstJoin(this));
         getCommand("sc").setExecutor(new SMChat(this));
+        getCommand("manager").setExecutor(new ManagerFlags());
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(this), this);
@@ -63,7 +64,6 @@ public class Main extends JavaPlugin {
         {
             jda = JDABuilder.createDefault("NjAxODA4NjEwMjIxMjI4MDMy.XTHr8Q.b2Q-tXhyIJ9JSiTJB-B4d4mKqfk").build();
             jda.addEventListener(new DiscordToChat());
-
         } catch (LoginException e)
         {
             e.printStackTrace();
