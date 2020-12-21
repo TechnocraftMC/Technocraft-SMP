@@ -3,6 +3,7 @@ package com.technocraft.server.commands;
 import com.technocraft.server.Main;
 import com.technocraft.server.util.Chat;
 import com.technocraft.server.util.DiscordUtils;
+import com.technocraft.server.util.Help;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,6 +11,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class GetAdminCommand implements CommandExecutor {
 
@@ -32,9 +37,13 @@ public class GetAdminCommand implements CommandExecutor {
 
         Player player = (Player) sender;*/
 
+
+        Help helpList = new Help("/getadmin <bool state> <String reason>", "Toggle the state of Season Manager's permissions. state = true, false");
+        String help = Chat.help("Get Admin", new Help[]{helpList});
+
         if (args.length < 1)
         {
-            sender.sendMessage(Chat.help("Get Admin", new String[]{"/getadmin <bool state> <String reason>"}, new String[]{"Toggle the state of Season Manager's permissions. state = true, false"}));
+            sender.sendMessage(help);
             return false;
         }
 
@@ -45,7 +54,7 @@ public class GetAdminCommand implements CommandExecutor {
         {
             if (args.length < 2)
             {
-                sender.sendMessage(Chat.help("Get Admin", new String[]{"/getadmin <bool state> <String reason>"}, new String[]{"Toggle the state of Season Manager's permissions. state = true, false"}));
+                sender.sendMessage(help);
                 return false;
             }
 
@@ -93,7 +102,7 @@ public class GetAdminCommand implements CommandExecutor {
             return true;
         } else
         {
-            sender.sendMessage(Chat.help("Get Admin", new String[]{"/getadmin <bool state>"}, new String[]{"Toggle the state of Season Manager's permissions. state = true, false"}));
+            sender.sendMessage(help);
             return false;
         }
     }

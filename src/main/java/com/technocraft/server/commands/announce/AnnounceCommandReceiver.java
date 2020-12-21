@@ -2,6 +2,7 @@ package com.technocraft.server.commands.announce;
 
 import com.technocraft.server.commands.global.GlobalCommand;
 import com.technocraft.server.util.Chat;
+import com.technocraft.server.util.Help;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,9 +13,9 @@ public class AnnounceCommandReceiver implements CommandExecutor {
     {
         if (args.length == 0)
         {
-            String help = Chat.help("Server Announce", new String[]{"/announce <message>"}, new String[]{"Send the server a message"});
+            Help helpBuilder = new Help("/announce <message>", "Send the server a message");
+            String help = Chat.help("Server Announce", new Help[]{helpBuilder});
             sender.sendMessage(help);
-            Chat.help("Server Announce", new String[]{"/announce <message>"}, new String[]{"Send the server a message"});
             return false;
         }
 

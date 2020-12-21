@@ -1,6 +1,7 @@
 package com.technocraft.server.commands.global;
 
 import com.technocraft.server.util.Chat;
+import com.technocraft.server.util.Help;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -16,7 +17,8 @@ public class GlobalCommandReceiver implements CommandExecutor {
     {
         if (args.length == 0)
         {
-            String help = Chat.help("Mini Announce", new String[]{"/global <message>"}, new String[]{"Send the server a mini announcement"});
+            Help helpBuilder = new Help("/global <message>", "Send the server a mini announcement");
+            String help = Chat.help("Mini Announce", new Help[]{ helpBuilder });
             sender.sendMessage(help);
         } else
         {

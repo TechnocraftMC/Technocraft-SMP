@@ -55,7 +55,7 @@ public class Updater implements CommandExecutor {
 
         if (args.length > 1)
         {
-            if (args[1].equalsIgnoreCase("-shutdown"))
+            if (args[1].equalsIgnoreCase("-s"))
             {
                 isShutdown = true;
             }

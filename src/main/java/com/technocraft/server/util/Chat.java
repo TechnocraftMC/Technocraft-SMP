@@ -6,6 +6,7 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chat {
@@ -110,13 +111,14 @@ public class Chat {
         return getPrefixColorCode() + divider + " " + getValueColor() + command + " " + getBodyColor() + instruction + ".";
     }
 
-    public static String help(String commandName, String command[], String instructions[])
+    public static String help(String commandName, Help[] helpCommands)
     {
         StringBuilder s = new StringBuilder();
         s.append(message("Help", "Listing Commands for: " + getValueColor() + commandName + getBodyColor() + ". \n"));
-        for (int i = 0; i < command.length; i++)
+        for (int i = 0; i < helpCommands.length; i++)
         {
-            s.append(helpListFormat(command[i], instructions[i]) + "\n");
+            Help help = helpCommands[i];
+            s.append(helpListFormat(help.getCommand(), help.getInstruction()) + "\n");
         }
         return s.toString();
     }
