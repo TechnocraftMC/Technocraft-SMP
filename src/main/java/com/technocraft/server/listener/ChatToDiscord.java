@@ -2,19 +2,13 @@ package com.technocraft.server.listener;
 
 import com.technocraft.server.Main;
 import com.technocraft.server.listener.seasonmanager.SMChat;
-import com.technocraft.server.util.Chat;
 import com.technocraft.server.util.DiscordUtils;
-import net.dv8tion.jda.api.MessageBuilder;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ChatToDiscord implements Listener {
@@ -29,23 +23,23 @@ public class ChatToDiscord implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e)
     {
-        if (!e.isCancelled())
+        DiscordUtils utils = new DiscordUtils();
+
+        TextChannel normal = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
+        TextChannel sm = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getSeasonPlannerChannelID());
+        String userMessage = e.getMessage();
+        if (e.getMessage().startsWith("!"))
         {
-            DiscordUtils utils = new DiscordUtils();
+            userMessage = userMessage.substring(1);
+        }
 
-            TextChannel normal = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
-            TextChannel sm = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getSeasonPlannerChannelID());
-            String userMessage = e.getMessage();
-            if (e.getMessage().startsWith("!"))
-            {
-                userMessage = userMessage.substring(1);
-            }
-
-            String messageToSend = e.getPlayer().getName() + ": " + userMessage;
-            if (SMChat.toggledChat.contains(e.getPlayer()) || (e.getMessage().startsWith("!") && e.getPlayer().hasPermission("group.seasonmanager-users")))
-            {
-                sm.sendMessage(messageToSend).queue();
-            } else
+        String messageToSend = e.getPlayer().getName() + ": " + userMessage;
+        if (SMChat.toggledChat.contains(e.getPlayer()) || (e.getMessage().startsWith("!") && e.getPlayer().hasPermission("group.seasonmanager-users")))
+        {
+            sm.sendMessage(messageToSend).queue();
+        } else
+        {
+            if (e.isCancelled())
             {
                 normal.sendMessage(messageToSend).allowedMentions(Collections.EMPTY_LIST).queue();
             }
