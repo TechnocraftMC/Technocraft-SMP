@@ -18,13 +18,6 @@ public class SMChat implements CommandExecutor, Listener {
 
     public static ArrayList<Player> toggledChat = new ArrayList<>();
 
-    private Main main;
-
-    public SMChat(Main main)
-    {
-        this.main = main;
-        actionBar(main);
-    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings)
@@ -68,7 +61,7 @@ public class SMChat implements CommandExecutor, Listener {
         }
     }
 
-    private static void actionBar(Main main)
+    public static void actionBar(Main main)
     {
         Bukkit.getScheduler().runTaskTimer(main, new Runnable() {
             @Override

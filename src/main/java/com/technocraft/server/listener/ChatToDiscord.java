@@ -25,8 +25,6 @@ public class ChatToDiscord implements Listener {
     {
         DiscordUtils utils = new DiscordUtils();
 
-        TextChannel normal = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
-        TextChannel sm = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getSeasonPlannerChannelID());
         String userMessage = e.getMessage();
         if (e.getMessage().startsWith("!"))
         {
@@ -36,11 +34,13 @@ public class ChatToDiscord implements Listener {
         String messageToSend = e.getPlayer().getName() + ": " + userMessage;
         if (SMChat.toggledChat.contains(e.getPlayer()) || (e.getMessage().startsWith("!") && e.getPlayer().hasPermission("group.seasonmanager-users")))
         {
+            TextChannel sm = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getSeasonPlannerChannelID());
             sm.sendMessage(messageToSend).queue();
         } else
         {
             if (e.isCancelled())
             {
+                TextChannel normal = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
                 normal.sendMessage(messageToSend).allowedMentions(Collections.EMPTY_LIST).queue();
             }
         }

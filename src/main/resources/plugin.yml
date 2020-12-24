@@ -62,3 +62,5 @@
       permission: group.seasonmanager-perms
       aliases:
         - mf
+    holiday:
+      description: HOLIDAY SPIRIT!!!
