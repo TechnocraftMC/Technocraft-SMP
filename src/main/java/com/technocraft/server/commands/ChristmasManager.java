@@ -38,6 +38,7 @@ public class ChristmasManager implements CommandExecutor {
         {
             playersWithChristmas.add(player);
             player.sendMessage(Chat.message("Holiday", "Holiday perks have been " + ChatColor.GREEN + "enabled" + Chat.getBodyColor() + "."));
+            player.sendMessage(ChatColor.DARK_GRAY + "To disable these perks, run " + ChatColor.GOLD + "/holday " + ChatColor.DARK_GRAY + "again.");
         }
 
         return false;
