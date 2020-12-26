@@ -34,8 +34,8 @@ public class Main extends JavaPlugin {
         getCommand("sc").setExecutor(new SMChat());
         SMChat.actionBar(this);
         getCommand("manager").setExecutor(new ManagerFlags());
-        getCommand("holiday").setExecutor(new ChristmasManager());
-        ChristmasManager.effects(this);
+/*        getCommand("holiday").setExecutor(new ChristmasManager());
+        ChristmasManager.effects(this);*/
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(this), this);
