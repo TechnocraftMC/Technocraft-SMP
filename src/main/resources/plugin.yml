@@ -12,12 +12,12 @@
       description: Send global title announcement
       aliases:
         - a
-      permission: seasonmanager-perms
+      permission: group.seasonmanagers-perms
     global:
       description: Send global chat announcement
       aliases:
         - g
-      permission: seasonmanager-perms
+      permission: group.seasonmanagers-perms
     chatbypass:
       description: Toggle user's chat bypass when the chat is silenced
       aliases:
@@ -33,7 +33,7 @@
       permission: op
     silence:
       description: Silence the chat
-      permission: seasonmanager-perms
+      permission: group.seasonmanagers-perms
     superchat:
       description: Bold your messages
       aliases:
@@ -46,20 +46,20 @@
       description: Elevated Season Manager permissions
       aliases:
         - ga
-      permission: group.seasonmanager-users
+      permission: group.seasonmanagers
     debug-firstjoin:
       description: DEBUG
       permission: op
       permission-message: DEBUG
     sc:
       description: Toggle Season Manager Chat
-      permission: group.seasonmanager-users
+      permission: group.seasonmanagers
     revert:
       description: Revert an inventory to before death
       permission: group.seasonmanager-perms
     manager:
       description: Control manager flags
-      permission: group.seasonmanager-perms
+      permission: group.seasonmanagers-perms
       aliases:
         - mf
     holiday:

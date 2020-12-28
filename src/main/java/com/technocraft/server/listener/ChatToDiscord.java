@@ -39,7 +39,7 @@ public class ChatToDiscord implements Listener {
 
 
 
-        if (SMChat.toggledChat.contains(e.getPlayer()) || (e.getMessage().startsWith("!") && e.getPlayer().hasPermission("group.seasonmanager-users")))
+        if (SMChat.toggledChat.contains(e.getPlayer()) || (e.getMessage().startsWith("!") && (e.getPlayer().hasPermission("group.seasonmanagers"))))
         {
             sm.sendMessage(messageToSend).queue();
         } else

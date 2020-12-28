@@ -38,7 +38,7 @@ public class SMChat implements CommandExecutor, Listener {
     @EventHandler
     public void onAsyncPlayerChat(AsyncPlayerChatEvent e)
     {
-        if (e.getPlayer().hasPermission("group.seasonmanager-users"))
+        if (e.getPlayer().hasPermission("group.seasonmanagers"))
         {
             String message = "";
             boolean sendingToSM = false;
@@ -55,7 +55,7 @@ public class SMChat implements CommandExecutor, Listener {
             if (sendingToSM)
             {
                 e.setCancelled(true);
-                Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + "&f&l " + e.getPlayer().getName() + " &b" + message), "group.seasonmanager-users");
+                Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + "&f&l " + e.getPlayer().getName() + " &b" + message), "group.seasonmanagers");
             }
 
         }

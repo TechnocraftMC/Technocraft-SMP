@@ -12,10 +12,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-
 public class GetAdminCommand implements CommandExecutor {
 
     private Main main;
@@ -73,10 +69,11 @@ public class GetAdminCommand implements CommandExecutor {
         if (args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("on"))
         {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group seasonmanager-users parent addtemp seasonmanager-perms 1h replace");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group trialseasonmanager-users parent addtemp trialseasonmanager-perms 1h replace");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp sync");
             for (Player seasonmanager : Bukkit.getOnlinePlayers())
             {
-                if (seasonmanager.hasPermission("group.seasonmanager-users"))
+                if (seasonmanager.hasPermission("group.seasonmanagers"))
                 {
                     seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "You now have" + Chat.valueAnn("Technocraft Season Manager elevated permissions", Chat.getminiAnnColor() + "(enabled by" + Chat.value(sender.getName(), "). Reason: " + Chat.value(reason, ".")))));
                     seasonmanager.sendMessage(ChatColor.RED + "Abuse of these permission will cause a demotion from your position. These permission are only to be used in an emergency or other season manager-related tasks. Do /help for a list of elevated commands.");
@@ -89,10 +86,11 @@ public class GetAdminCommand implements CommandExecutor {
         } else if (args[0].equalsIgnoreCase("false") || args[0].equalsIgnoreCase("off"))
         {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group seasonmanager-users parent removetemp seasonmanager-perms");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group trialseasonmanager-users parent removetemp trialseasonmanager-perms");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp sync");
             for (Player seasonmanager : Bukkit.getOnlinePlayers())
             {
-                if (seasonmanager.hasPermission("group.seasonmanager-users"))
+                if (seasonmanager.hasPermission("group.seasonmanagers"))
                 {
                     seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "Your season manager permissions have" + Chat.valueAnn("expired", ".")));
                 }
