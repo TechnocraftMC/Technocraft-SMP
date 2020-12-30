@@ -46,6 +46,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new JoinLeave(this), this);
         Bukkit.getPluginManager().registerEvents(new CommandListener(this), this);
         Bukkit.getPluginManager().registerEvents(new SMChat(), this);
+        Bukkit.getPluginManager().registerEvents(new ChristmasManager(this), this);
 
 
         /*File logs = new File(this.getDataFolder().getPath() + "/data.txt");
