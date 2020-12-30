@@ -2,7 +2,6 @@ package com.technocraft.server.listener;
 
 import com.technocraft.server.util.Chat;
 import com.technocraft.server.util.DiscordUtils;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.Bukkit;
@@ -49,7 +48,7 @@ public class DiscordToChat extends ListenerAdapter {
 
                 } else
                 {
-                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + e.getAuthor().getAsTag() + "&8: &f" + e.getMessage().getContentDisplay()));
+                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + e.getAuthor().getAsTag() + "&8: &f" + e.getMessage().getContentDisplay()).trim());
                 }
             }
 
