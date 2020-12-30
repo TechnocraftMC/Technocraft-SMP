@@ -34,8 +34,7 @@ public class Main extends JavaPlugin {
         getCommand("sc").setExecutor(new SMChat());
         SMChat.actionBar(this);
         getCommand("manager").setExecutor(new ManagerFlags());
-/*        getCommand("holiday").setExecutor(new ChristmasManager());
-        ChristmasManager.effects(this);*/
+        getCommand("holiday").setExecutor(new ChristmasManager(this));
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(this), this);
@@ -67,6 +66,7 @@ public class Main extends JavaPlugin {
         {
             jda = JDABuilder.createDefault("NjAxODA4NjEwMjIxMjI4MDMy.XTHr8Q.b2Q-tXhyIJ9JSiTJB-B4d4mKqfk").build();
             jda.addEventListener(new DiscordToChat());
+
         } catch (LoginException e)
         {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable()
     {
-        jda.shutdown();
+        jda.shutdownNow();
         System.out.println("Technocraft core has been disabled!");
     }
 
