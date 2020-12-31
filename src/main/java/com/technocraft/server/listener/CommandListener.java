@@ -19,7 +19,7 @@ public class CommandListener implements Listener {
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent e)
     {
-        if (e.getPlayer().hasPermission("group.seasonmanager-perms"))
+        if (e.getPlayer().hasPermission("group.seasonmanagers-perms"))
         {
             DiscordUtils utils = new DiscordUtils();
             TextChannel adminLogs = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getAdminLogsChannelID());
