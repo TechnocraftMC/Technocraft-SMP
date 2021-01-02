@@ -137,15 +137,12 @@ public class InventoryRevert implements CommandExecutor, Listener {
     {
         if (!e.getKeepInventory())
         {
-            e.setKeepInventory(true);
-            inventories.add(new TechnoInventory(e.getEntity(), e.getEntity().getInventory().getContents(), e.getEntity().getLocation(), e.getDrops()));
-
             if (!e.getEntity().isOp())
             {
+                e.setKeepInventory(true);
+                inventories.add(new TechnoInventory(e.getEntity(), e.getEntity().getInventory().getContents(), e.getEntity().getLocation(), e.getDrops()));
                 e.getEntity().getInventory().clear();
             }
         }
-
     }
-
 }
