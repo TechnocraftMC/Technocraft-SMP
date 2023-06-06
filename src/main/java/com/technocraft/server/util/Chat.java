@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Chat {
     private static ChatColor prefixColorCode = ChatColor.BLUE;
-    private static String prefix = "Technocraft";
+    private static String prefix = "Server";
     private static char divider = '>';
 
     private static ChatColor bodyColor = ChatColor.WHITE;

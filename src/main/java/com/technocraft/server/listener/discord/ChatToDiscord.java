@@ -1,4 +1,4 @@
-package com.technocraft.server.listener;
+package com.technocraft.server.listener.discord;
 
 import com.technocraft.server.Main;
 import com.technocraft.server.listener.seasonmanager.SMChat;
@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
@@ -33,13 +34,13 @@ public class ChatToDiscord implements Listener {
 
 
         TextChannel normal = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getListenerChannelID());
-        TextChannel sm = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getSeasonPlannerChannelID());
+        TextChannel sm = main.getJDA().getGuildById(utils.getGuildID()).getTextChannelById(utils.getAdminChannelID());
 
         String messageToSend = e.getPlayer().getName() + ": " + userMessage;
 
 
 
-        if (SMChat.toggledChat.contains(e.getPlayer()) || (e.getMessage().startsWith("!") && (e.getPlayer().hasPermission("group.seasonmanagers"))))
+        if (SMChat.toggledChat.contains(e.getPlayer()) || (e.getMessage().startsWith("!") && (e.getPlayer().hasPermission("group.admin-users"))))
         {
             sm.sendMessage(messageToSend).queue();
         } else

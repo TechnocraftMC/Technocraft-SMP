@@ -1,4 +1,4 @@
-package com.technocraft.server.listener;
+package com.technocraft.server.listener.lockdown;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

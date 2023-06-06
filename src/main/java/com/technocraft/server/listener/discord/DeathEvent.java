@@ -1,4 +1,4 @@
-package com.technocraft.server.listener;
+package com.technocraft.server.listener.discord;
 
 import com.technocraft.server.Main;
 import com.technocraft.server.util.DiscordUtils;

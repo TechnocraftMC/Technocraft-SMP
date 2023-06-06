@@ -1,5 +1,6 @@
-package com.technocraft.server.listener;
+package com.technocraft.server.listener.discord;
 
+import com.technocraft.server.Main;
 import com.technocraft.server.util.Chat;
 import com.technocraft.server.util.DiscordUtils;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -29,7 +30,7 @@ public class DiscordToChat extends ListenerAdapter {
         DiscordUtils utils = new DiscordUtils();
         if (e.getGuild().getIdLong() == utils.getGuildID())
         {
-            if (e.getChannel().getIdLong() == utils.getListenerChannelID() || e.getChannel().getIdLong() == utils.getSeasonPlannerChannelID())
+            if (e.getChannel().getIdLong() == utils.getListenerChannelID() || e.getChannel().getIdLong() == utils.getAdminChannelID())
             {
 
                 String prefix = "";
@@ -37,22 +38,16 @@ public class DiscordToChat extends ListenerAdapter {
                 if (e.getMember().getRoles().contains(e.getGuild().getRoleById(utils.getAdminRoleID())))
                 {
                     prefix = "&4[Admin]&f";
-                } else if (e.getMember().getRoles().contains(e.getGuild().getRoleById(utils.getSeasonManagerRoleID())))
-                {
-                    prefix = "&c[Season Manager]&f";
+                    if (e.getChannel().getIdLong() == utils.getAdminChannelID())
+                    {
+                        Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + " &f&l" + e.getAuthor().getAsTag() + " &b" + e.getMessage().getContentDisplay()), Main.getAdminUserPerm);
+                    } else
+                    {
+                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + e.getAuthor().getAsTag() + "&8: &f" + e.getMessage().getContentDisplay()).trim());
+                    }
                 }
 
-                if (e.getChannel().getIdLong() == utils.getSeasonPlannerChannelID())
-                {
-                    Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + " &f&l" + e.getAuthor().getAsTag() + " &b" + e.getMessage().getContentDisplay()), "group.seasonmanager-users");
-
-                } else
-                {
-                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix + " " + e.getAuthor().getAsTag() + "&8: &f" + e.getMessage().getContentDisplay()).trim());
-                }
             }
-
         }
     }
-
 }

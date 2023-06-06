@@ -4,29 +4,24 @@ public class DiscordUtils {
 
     public long getGuildID()
     {
-        return 601804017986830337L;
+        return 1115774951081918597L;
     }
 
     public long getListenerChannelID()
     {
-        return 601808507221835776L;
-    }
-
-    public long getSeasonManagerRoleID()
-    {
-        return 627345784882331648L;
+        return 1115775548686352384L;
     }
 
     public long getAdminRoleID()
     {
-        return 601804468765327360L;
+        return 1115774977879330927L;
     }
 
     public long getAdminLogsChannelID()
     {
-        return 630136639460605963L;
+        return 1115775328879640576L;
     }
 
-    public long getSeasonPlannerChannelID() { return 627346165993701386L; }
+    public long getAdminChannelID() { return 1115775310944804864L; }
 
 }

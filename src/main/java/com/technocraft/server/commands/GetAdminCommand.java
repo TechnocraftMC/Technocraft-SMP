@@ -34,7 +34,7 @@ public class GetAdminCommand implements CommandExecutor {
         Player player = (Player) sender;*/
 
 
-        Help helpList = new Help("/getadmin <bool state> <String reason>", "Toggle the state of Season Manager's permissions. state = true, false");
+        Help helpList = new Help("/getadmin <bool state> <String reason>", "Toggle the state of Admin permissions. state = true, false");
         String help = Chat.help("Get Admin", new Help[]{helpList});
 
         if (args.length < 1)
@@ -68,35 +68,33 @@ public class GetAdminCommand implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("true") || args[0].equalsIgnoreCase("on"))
         {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group seasonmanager-users parent addtemp seasonmanager-perms 1h replace");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group trialseasonmanager-users parent addtemp trialseasonmanager-perms 1h replace");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group admin-users parent addtemp admin-perms 1h replace");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp sync");
-            for (Player seasonmanager : Bukkit.getOnlinePlayers())
+            for (Player onlineAdmins : Bukkit.getOnlinePlayers())
             {
-                if (seasonmanager.hasPermission("group.seasonmanagers"))
+                if (onlineAdmins.hasPermission("group.admin-users"))
                 {
-                    seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "You now have" + Chat.valueAnn("Technocraft Season Manager elevated permissions", Chat.getminiAnnColor() + "(enabled by" + Chat.value(sender.getName(), "). Reason: " + Chat.value(reason, ".")))));
-                    seasonmanager.sendMessage(ChatColor.RED + "Abuse of these permission will cause a demotion from your position. These permission are only to be used in an emergency or other season manager-related tasks. Do /help for a list of elevated commands.");
+                    onlineAdmins.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "You now have" + Chat.valueAnn("Admin elevated permissions", Chat.getminiAnnColor() + "(enabled by" + Chat.value(sender.getName(), "). Reason: " + Chat.value(reason, ".")))));
+                    onlineAdmins.sendMessage(ChatColor.RED + "Abuse of these permission will cause a demotion from your position. These permission are only to be used in an emergency or other admin-related tasks. Do /help for a list of elevated commands.");
                 }
             }
-            System.out.println("WARNING: " + sender.getName() + " has enabled Elevated Season Manager permissions.");
-            adminLogs.sendMessage("@here **" + sender.getName() + "** has enabled **Elevated Season Manager Permissions**.").queue();
+            System.out.println("WARNING: " + sender.getName() + " has enabled elevated permissions.");
+            adminLogs.sendMessage("@here **" + sender.getName() + "** has enabled **Elevated Admin Permissions**.").queue();
             adminLogs.sendMessage("Reason: " + reason).queue();
             return true;
         } else if (args[0].equalsIgnoreCase("false") || args[0].equalsIgnoreCase("off"))
         {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group seasonmanager-users parent removetemp seasonmanager-perms");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group trialseasonmanager-users parent removetemp trialseasonmanager-perms");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp group admin-users parent removetemp admin-perms");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp sync");
-            for (Player seasonmanager : Bukkit.getOnlinePlayers())
+            for (Player onlineAdmins : Bukkit.getOnlinePlayers())
             {
-                if (seasonmanager.hasPermission("group.seasonmanagers"))
+                if (onlineAdmins.hasPermission("group.admin-users"))
                 {
-                    seasonmanager.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "Your season manager permissions have" + Chat.valueAnn("expired", ".")));
+                    onlineAdmins.sendMessage(Chat.getminiAnn(Chat.getminiAnnColor() + "Your Admin permissions have" + Chat.valueAnn("expired", ".")));
                 }
             }
-            System.out.println("Elevated Season Manager permissions have expired.");
-            adminLogs.sendMessage("**Elevated Season Manager Permissions** have expired.").queue();
+            System.out.println("Elevated Admin permissions have expired.");
+            adminLogs.sendMessage("**Elevated Admin Permissions** have expired.").queue();
             return true;
         } else
         {

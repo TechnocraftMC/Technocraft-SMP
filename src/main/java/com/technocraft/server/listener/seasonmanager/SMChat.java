@@ -26,11 +26,11 @@ public class SMChat implements CommandExecutor, Listener {
         if (toggledChat.contains(player))
         {
             toggledChat.remove(player);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + " &fYou have &cdisabled " + Chat.getValueColor() + "Season Manager Chat" + Chat.getBodyColor() + "."));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + " &fYou have &cdisabled " + Chat.getValueColor() + "Admin Chat" + Chat.getBodyColor() + "."));
         } else
         {
             toggledChat.add(player);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + " &fYou have &aenabled " + Chat.getValueColor() + "Season Manager Chat" + Chat.getBodyColor() + "."));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Chat.getSMPrefix() + " &fYou have &aenabled " + Chat.getValueColor() + "Admin Chat" + Chat.getBodyColor() + "."));
         }
         return false;
     }
@@ -75,7 +75,7 @@ public class SMChat implements CommandExecutor, Listener {
                             @Override
                             public void run()
                             {
-                                p.sendActionBar(ChatColor.translateAlternateColorCodes('&', "&c[Management] &6Season Manager Chat &8is enabled."));
+                                p.sendActionBar(ChatColor.translateAlternateColorCodes('&', "&c[Management] &6Admin Chat &8is enabled."));
                             }
                         }, i * 20L);
                     }
