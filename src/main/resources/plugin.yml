@@ -5,24 +5,24 @@
 
   main: com.technocraft.server.Main
   depend: [TitleAPI, Essentials, WorldGuard]
-  api-version: 1.16
+  api-version: 1.20
 
   commands:
     announce:
       description: Send global title announcement
       aliases:
         - a
-      permission: group.admin-users
+      permission: op
     global:
       description: Send global chat announcement
       aliases:
         - g
-      permission: group.admin-users
+      permission: op
     chatbypass:
       description: Toggle user's chat bypass when the chat is silenced
       aliases:
         - sb
-      permission: group.admin-users
+      permission: op
     gm:
       description: Toggle gamemode
       permission: op
@@ -33,25 +33,14 @@
       permission: op
     silence:
       description: Silence the chat
-      permission: group.admin-users
+      permission: op
     superchat:
       description: Bold your messages
       aliases:
         - z
-      permission: group.admin-users
+      permission: op
     updater:
       description: Schedule server restart
-      permission: op
-    getadmin:
-      description: Elevated Season Manager permissions
-      aliases:
-        - ga
-      permission: group.admin-users
-    sc:
-      description: Toggle Admin Chat
-      permission: group.admin-users
-    revert:
-      description: Revert an inventory to before death
       permission: op
     manager:
       description: Control manager flags
