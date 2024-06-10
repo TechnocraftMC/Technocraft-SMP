@@ -32,7 +32,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable()
     {
-        System.out.println("Technocraft core has been disabled!");
+        System.out.println("Technocraft Core has been disabled!");
     }
 
 
