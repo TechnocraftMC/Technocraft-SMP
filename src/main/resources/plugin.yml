@@ -4,20 +4,20 @@
   authors: [Wiz_Techno, Technocraft]
 
   main: com.technocraft.server.Main
-  depend: [TitleAPI, Essentials, WorldGuard]
-  api-version: 1.16
+  depend: [Essentials, WorldGuard]
+  api-version: 1.20
 
   commands:
     announce:
       description: Send global title announcement
       aliases:
         - a
-      permission: group.seasonmanagers-perms
+      permission: op
     global:
       description: Send global chat announcement
       aliases:
         - g
-      permission: group.seasonmanagers-perms
+      permission: op
     chatbypass:
       description: Toggle user's chat bypass when the chat is silenced
       aliases:
@@ -33,34 +33,17 @@
       permission: op
     silence:
       description: Silence the chat
-      permission: group.seasonmanagers-perms
+      permission: op
     superchat:
       description: Bold your messages
       aliases:
         - z
-      permission: seasonmanager-perms
+      permission: op
     updater:
       description: Schedule server restart
       permission: op
-    getadmin:
-      description: Elevated Season Manager permissions
-      aliases:
-        - ga
-      permission: group.seasonmanagers
-    debug-firstjoin:
-      description: DEBUG
-      permission: op
-      permission-message: DEBUG
-    sc:
-      description: Toggle Season Manager Chat
-      permission: group.seasonmanagers
-    revert:
-      description: Revert an inventory to before death
-      permission: group.seasonmanager-perms
     manager:
       description: Control manager flags
-      permission: group.seasonmanagers-perms
+      permission: op
       aliases:
         - mf
-    holiday:
-      description: HOLIDAY SPIRIT!!!

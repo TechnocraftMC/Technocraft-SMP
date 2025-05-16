@@ -1,17 +1,19 @@
 package com.technocraft.server.commands.announce;
 
-import com.connorlinfoot.titleapi.TitleAPI;
 import com.technocraft.server.util.Chat;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.Duration;
+
 public class AnnounceCommand {
 
-    public void announce(String title, @NotNull  String subtitle)
+    public void announce(String title, @NotNull String subtitle)
     {
-
 
 
         if (title == null)
@@ -24,7 +26,7 @@ public class AnnounceCommand {
 
         for (Player player : Bukkit.getOnlinePlayers())
         {
-            TitleAPI.sendTitle(player, 20, 100, 40, ChatColor.GOLD + title, subtitle);
+            player.showTitle(Title.title(Component.text(ChatColor.GOLD + title), Component.text(subtitle), Title.Times.times(Duration.ofSeconds(1), Duration.ofSeconds(5), Duration.ofSeconds(2))));
         }
 
         Chat.pingAll();

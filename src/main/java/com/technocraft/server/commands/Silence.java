@@ -61,7 +61,7 @@ public class Silence implements CommandExecutor, Listener {
         {
             if (!(ChatBypass.bypassPlayers.contains(e.getPlayer())))
             {
-                if (!e.getPlayer().isOp())
+                if (!e.getPlayer().isOp() || !e.getPlayer().hasPermission("group.admin-users"))
                 {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(ChatColor.RED + "The chat is silenced.");
@@ -77,7 +77,7 @@ public class Silence implements CommandExecutor, Listener {
         {
             if (!(ChatBypass.bypassPlayers.contains(Bukkit.getPlayer(e.getSender().getName()))))
             {
-                if (!Bukkit.getPlayer(e.getSender().getName()).isOp())
+                if (!Bukkit.getPlayer(e.getSender().getName()).isOp() || !Bukkit.getPlayer(e.getSender().getName()).hasPermission("group.admin-users"))
                 {
                     e.setCancelled(true);
                     e.getSender().sendMessage(ChatColor.RED + "The chat is silenced.");
