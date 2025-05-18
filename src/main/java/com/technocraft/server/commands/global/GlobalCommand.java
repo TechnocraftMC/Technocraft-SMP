@@ -1,5 +1,12 @@
 package com.technocraft.server.commands.global;
 
+import com.sk89q.worldedit.util.formatting.text.format.TextDecoration;
+import com.technocraft.server.util.Chat;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentLike;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -40,8 +47,9 @@ public class GlobalCommand {
         message = ChatColor.translateAlternateColorCodes('&', message);
         for (Player player : players)
         {
-            player.playSound(player.getLocation(), sound, 2F, 1F);
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&k&l_&r") + ChatColor.BLUE + "" + ChatColor.BOLD + "ANNOUNCEMENT: " + ChatColor.AQUA + message);
         }
+        Bukkit.getServer().sendActionBar(Component.text(message, NamedTextColor.BLUE));
+        Chat.pingAll();
     }
 }
