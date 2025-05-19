@@ -84,7 +84,7 @@ public class Updater implements CommandExecutor {
 
 
         new AnnounceCommand().announce(getAction(true, true), getAction(false, false) + " IN " + ChatColor.GOLD + timeDisplay + " " + unitsDisplay + ChatColor.WHITE + "...");
-        new GlobalCommand().global(getAction(false, false) + " IN " + timeDisplay + " " + unitsDisplay + "!");
+        new GlobalCommand().global(getAction(false, false) + " IN " + timeDisplay + " " + unitsDisplay + "!", true);
 
         GlobalCommand global = new GlobalCommand(Sound.ENTITY_ENDER_DRAGON_GROWL);
 
@@ -159,7 +159,7 @@ public class Updater implements CommandExecutor {
         Bukkit.getScheduler().runTaskLater(main, new Runnable() {
             public void run()
             {
-                global.global("Server " + getActionLowerCase() + " in 10 seconds...");
+                global.global("Server " + getActionLowerCase() + " in 10 seconds...", true);
             }
         }, toTicks(secondsUntilRestart - 5));
 
@@ -168,7 +168,7 @@ public class Updater implements CommandExecutor {
         Bukkit.getScheduler().runTaskLater(main, new Runnable() {
             public void run()
             {
-                global.global("Server " + getActionLowerCase() + " in 5 seconds...");
+                global.global("Server " + getActionLowerCase() + " in 5 seconds...", true);
             }
         }, toTicks(secondsUntilRestart));
 
