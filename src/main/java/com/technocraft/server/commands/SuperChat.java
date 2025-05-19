@@ -1,5 +1,6 @@
 package com.technocraft.server.commands;
 
+import com.technocraft.server.util.Chat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,11 +24,11 @@ public class SuperChat implements CommandExecutor, Listener {
         if (superUsers.contains(p))
         {
             superUsers.remove(p);
-            p.sendMessage("You are no longer in super chat mode.");
+            Chat.message("SuperChat", "You are no longer in super chat mode.");
         } else
         {
             superUsers.add(p);
-            p.sendMessage("You are now in super chat mode.");
+            Chat.message("SuperChat", "You are now in super chat mode.");
         }
         return true;
     }
