@@ -30,7 +30,7 @@ public class AnnounceCommandReceiver implements CommandExecutor {
 
         message = sb.toString().trim();
 
-        new GlobalCommand().global(message);
+        new GlobalCommand().global(message, false);
         new AnnounceCommand().announce(null, message);
 
 
