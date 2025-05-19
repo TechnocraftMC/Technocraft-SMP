@@ -209,6 +209,6 @@ public class DeathEvent implements Listener {
         {
             return "swft";
         }
-        return null;
+        return enchant.getKey().toString();
     }
 }
