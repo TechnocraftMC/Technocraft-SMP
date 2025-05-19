@@ -30,7 +30,7 @@ public class GlobalCommandReceiver implements CommandExecutor {
             }
             message = sb.toString().trim();
 
-            new GlobalCommand().global(message);
+            new GlobalCommand().global(message, true);
         }
         return false;
     }
