@@ -7,30 +7,32 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
 
 public class AnnounceCommand {
 
-    public void announce(String title, @NotNull String subtitle)
+    final Title.Times times = Title.Times.times(Duration.ofSeconds(1), Duration.ofSeconds(5), Duration.ofSeconds(2));
+
+    public void announce(@Nullable String titleText, @NotNull String subtitleText)
     {
-
-
-        if (title == null)
+        //Set title to Announcement
+        if (titleText == null)
         {
-            title = ChatColor.GOLD + "Announcement";
+            titleText = ChatColor.GOLD + "Announcement";
         }
 
-        title = ChatColor.translateAlternateColorCodes('&', title);
-        subtitle = ChatColor.translateAlternateColorCodes('&', subtitle);
+        //Set text of title and subtitle
+        titleText = ChatColor.translateAlternateColorCodes('&', titleText);
+        subtitleText = ChatColor.translateAlternateColorCodes('&', subtitleText);
 
-        for (Player player : Bukkit.getOnlinePlayers())
-        {
-            player.showTitle(Title.title(Component.text(ChatColor.GOLD + title), Component.text(subtitle), Title.Times.times(Duration.ofSeconds(1), Duration.ofSeconds(5), Duration.ofSeconds(2))));
-        }
+        //Built the title method
+        Title title  = Title.title(Component.text(ChatColor.GOLD + titleText), Component.text(subtitleText), times);
 
+        //Execute title to all players
+        Bukkit.getServer().showTitle(title);
         Chat.pingAll();
-
     }
 
 }
