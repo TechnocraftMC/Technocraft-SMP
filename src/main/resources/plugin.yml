@@ -47,3 +47,9 @@
       permission: op
       aliases:
         - mf
+    debug-firstjoin:
+      description: Debug first join sequence
+      permission: op
+    lockdown:
+      description: Enable server lockdown
+      permission: op

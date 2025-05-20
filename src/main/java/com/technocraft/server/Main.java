@@ -4,6 +4,7 @@ import com.technocraft.server.commands.*;
 import com.technocraft.server.commands.announce.AnnounceCommandReceiver;
 import com.technocraft.server.commands.global.GlobalCommandReceiver;
 import com.technocraft.server.listener.DeathEvent;
+import com.technocraft.server.listener.FirstJoinEvent;
 import com.technocraft.server.listener.lockdown.ServerPingEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,11 +24,14 @@ public class Main extends JavaPlugin {
         getCommand("superchat").setExecutor(new SuperChat());
         getCommand("updater").setExecutor(new Updater(this));
         getCommand("manager").setExecutor(new ManagerFlags());
+        getCommand("debug-firstjoin").setExecutor(new FirstJoinEvent(this));
+        getCommand("lockdown").setExecutor(new LockdownCommand(this));
 
         Bukkit.getPluginManager().registerEvents(new Silence(), this);
         Bukkit.getPluginManager().registerEvents(new SuperChat(), this);
         Bukkit.getPluginManager().registerEvents(new ServerPingEvent(), this);
         Bukkit.getPluginManager().registerEvents(new DeathEvent(this), this);
+        Bukkit.getPluginManager().registerEvents(new FirstJoinEvent(this), this);
         System.out.println("Technocraft Core has been enabled!");
     }
 
