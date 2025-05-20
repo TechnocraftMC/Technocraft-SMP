@@ -136,16 +136,6 @@ public class Chat {
             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 2F, 1F);
         }
     }
-
-
-    //SEASON MANAGER
-
-
-    public static String getSMPrefix() { return ChatColor.translateAlternateColorCodes('&', "&b&lManager" + getBodyColor()); }
-
-
-
-
 }
 enum BodyType {
     NORMAL, ANNOUNCEMENT
