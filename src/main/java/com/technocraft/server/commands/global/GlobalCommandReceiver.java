@@ -18,7 +18,7 @@ public class GlobalCommandReceiver implements CommandExecutor {
         if (args.length == 0)
         {
             Help helpBuilder = new Help("/global <message>", "Send the server a mini announcement");
-            String help = Chat.help("Mini Announce", new Help[]{ helpBuilder });
+            String help = Chat.help("Mini Announce", new Help[]{helpBuilder});
             sender.sendMessage(help);
         } else
         {
