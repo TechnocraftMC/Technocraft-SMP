@@ -17,6 +17,7 @@ import java.time.Duration;
 
 public class LockdownCommand implements CommandExecutor {
     private Main main;
+    public static boolean isLocked;
 
     public LockdownCommand(Main main)
     {
@@ -26,7 +27,7 @@ public class LockdownCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
     {
-        if (Bukkit.hasWhitelist())
+        if (isLocked)
         {
             disableLockdownMode();
         } else { enableLockdownMode(); }
@@ -58,9 +59,14 @@ public class LockdownCommand implements CommandExecutor {
             @Override
             public void run()
             {
-                //whitelist enforced should already be set to true in server.properties
-                Bukkit.setWhitelist(true);
-                new GlobalCommand().global("Whitelist enabled", true);
+                for (Player player : Bukkit.getOnlinePlayers())
+                {
+                    if (!player.isOp() || !player.hasPermission("group.admin"))
+                    {
+                        player.kick(Component.text("Server maintenance mode has begun. Please check Discord for updates."));
+                    }
+                }
+                new GlobalCommand().global("All players kicked", true);
             }
         }, toTicks(12));
     }
@@ -69,7 +75,6 @@ public class LockdownCommand implements CommandExecutor {
     {
         new AnnounceCommand().announce("Maintenance Mode", "The server is no longer in maintenance mode");
         new GlobalCommand().global("Whitelist disabled", true);
-        Bukkit.setWhitelist(false);
     }
 
     private Long toTicks(int seconds)
