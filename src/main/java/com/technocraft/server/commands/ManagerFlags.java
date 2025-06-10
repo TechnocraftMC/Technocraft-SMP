@@ -35,7 +35,7 @@ public class ManagerFlags implements CommandExecutor {
             isEnabled = true;
         } else if (args[1].equalsIgnoreCase("disable") | args[1].equalsIgnoreCase("d"))
         {
-            action = " -g nonmembers deny";
+            action = " deny";
         } else
         {
             sender.sendMessage(help);
@@ -46,21 +46,21 @@ public class ManagerFlags implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("pvp") | args[0].equalsIgnoreCase("p"))
         {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg flag __global__ pvp -w world" + action);
+            Bukkit.dispatchCommand(sender, "rg flag __global__ pvp" + action);
             flagSerialized = "PvP";
         } else if (args[0].equalsIgnoreCase("items") | args[0].equalsIgnoreCase("i"))
         {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg flag __global__ item-pickup -w world" + action);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg flag __global__ item-drop -w world" + action);
+            Bukkit.dispatchCommand(sender, "rg flag __global__ item-pickup" + action);
+            Bukkit.dispatchCommand(sender, "rg flag __global__ item-drop" + action);
             flagSerialized = "Item Pickup/Drop";
         } else if (args[0].equalsIgnoreCase("damage") | args[0].equalsIgnoreCase("d"))
         {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg flag __global__ mob-damage -w world" + action);
+            Bukkit.dispatchCommand(sender, "rg flag __global__ mob-damage" + action);
             flagSerialized = "Mob Damage";
         } else if (args[0].equalsIgnoreCase("block") | args[0].equalsIgnoreCase("b"))
         {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg flag __global__ block-break -w world" + action);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg flag __global__ block-place -w world" + action);
+            Bukkit.dispatchCommand(sender, "rg flag __global__ block-break" + action);
+            Bukkit.dispatchCommand(sender, "rg flag __global__ block-place" + action);
             flagSerialized = "Block Break/Place";
         } else
         {
@@ -68,7 +68,7 @@ public class ManagerFlags implements CommandExecutor {
             return true;
         }
 
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg reload");
+        Bukkit.dispatchCommand(sender, "rg reload");
 
         String value;
         if (isEnabled)
