@@ -43,7 +43,7 @@ public class LockdownCommand implements CommandExecutor {
             @Override
             public void run()
             {
-                new GlobalCommand().global("The whitelist will be enabled and all server members will be kicked.", true);
+                new GlobalCommand().global("All server members will be kicked.", true);
             }
         }, toTicks(5));
 
@@ -67,6 +67,7 @@ public class LockdownCommand implements CommandExecutor {
                     }
                 }
                 new GlobalCommand().global("All players kicked", true);
+                isLocked = true;
             }
         }, toTicks(12));
     }
@@ -75,6 +76,7 @@ public class LockdownCommand implements CommandExecutor {
     {
         new AnnounceCommand().announce("Maintenance Mode", "The server is no longer in maintenance mode");
         new GlobalCommand().global("Whitelist disabled", true);
+        isLocked = false;
     }
 
     private Long toTicks(int seconds)
